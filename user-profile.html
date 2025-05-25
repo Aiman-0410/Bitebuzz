@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Bite Buzz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(images/user-background.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .profile-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.2); /* Adjust transparency level */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            height: auto;
+            color: #fff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+     }
+
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .profile-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid ;
+        }
+
+        .avatar-selection {
+            margin-top: 2px;
+            text-align: center;
+        }
+
+        .avatars {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .avatar-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-top: 10px;
+        }
+
+        .profile-info {
+            text-align: left;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            ;
+        }
+
+        .profile-info label {
+            font-size: 1rem;
+            color: bisque;
+            font-weight: 600;
+        }
+
+        .profile-info input {
+            width: 97%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: white /* Slightly transparent inputs */
+            color black;
+        }
+
+        .update-btn {
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 15px auto;
+            display: block;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .update-btn:active {
+            transform: scale(0.95);
+       }
+
+        .update-btn:hover {
+            background-color: #e68900;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                width: 70%;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .avatar-option {
+                width: 45px;
+                height: 45px;
+            }
+        }
+        @media (max-width: 600px) {
+          .avatar-option {
+            width: 35px; /* Smaller avatars */
+            height: 35px;
+          } 
+          .profile-header img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        @media (max-width: 480px) {
+          .avatar-option {
+            width: 35px; /* Smaller avatars */
+            height: 35px;
+          }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img id="selected-avatar" src="images/avatar1.jpeg" alt="User Avatar">
+            <h1>User Profile</h1>
+
+            <div class="avatar-selection">
+               <p>Select an avatar:</p>
+               <div class="avatars">
+                   <img class="avatar-option" src="images/avatar1.jpeg" alt="Avatar 1">
+                   <img class="avatar-option" src="images/avatar2.png" alt="Avatar 2">
+                   <img class="avatar-option" src="images/avatar3.png" alt="Avatar 3">
+                   <img class="avatar-option" src="images/avatar4.png" alt="Avatar 4">
+               </div>
+            </div>
+        </div>
+
+        <div class="profile-info">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username" value="">
+
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" value="">
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number" value="">
+
+            <label for="address">Delivery Address:</label>
+            <input type="text" id="address" placeholder="Enter your address" value="">
+
+            <button class="update-btn">Update Profile</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          fetch("user_profile.php", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.message) {
+              alert(data.message);
+              return;
+            }
+
+            document.getElementById("username").value = data.username || "";
+            document.getElementById("email").value = data.email || "";
+            document.getElementById("phone").value = data.phone || "";
+            document.getElementById("address").value = data.address || "";
+            document.getElementById("selected-avatar").src = data.avatar || "images/avatar1.jpeg";
+          })
+          .catch(error => console.error("Failed to fetch profile:", error));
+        });
+
+        document.querySelector(".update-btn").addEventListener("click", () => {
+          console.log("Update button clicked!"); // Debug log
+
+          const data = {
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            address: document.getElementById("address").value.trim(),
+            avatar: document.getElementById("selected-avatar").src
+          };
+
+          fetch("user_profile.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(result => {
+            console.log("Server response:", result);
+            alert(result.message);
+          })
+          .catch(error => console.error("Error in profile update:", error));
+        });
+
+        // ** Avatar Selection Handling **
+        const avatarOptions = document.querySelectorAll('.avatar-option');
+        const selectedAvatar = document.getElementById('selected-avatar');
+
+        avatarOptions.forEach(avatar => {
+          avatar.addEventListener("click", () => {
+            selectedAvatar.style.transition = "opacity 0.5s ease-in-out";
+            selectedAvatar.style.opacity = "0";
+
+            setTimeout(() => {
+              selectedAvatar.src = avatar.src;
+              selectedAvatar.style.opacity = "1";
+            }, 500);
+          });
+        });
+
+    </script>
+</body>
+</html>

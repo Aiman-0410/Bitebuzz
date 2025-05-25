@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BiteBuzz</title>
+  <style>
+    .about-us {
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    background-image: url('images/about-us.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+/* Overlay to darken the background */
+  .about-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Adjust last value for darkness */
+  }
+
+/* Ensure content is above the overlay */
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: red;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    color: orange;
+    margin-top: 30px;
+    text-align: right;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: white;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    text-align: right;
+    color: white;
+  }
+
+  ul li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  /* Mobile Friendly Adjustments */
+  @media (max-width: 768px) {
+    .about-us {
+        padding: 30px;
+        background-size: cover; /* Adjusts background for smaller screens */
+    }
+
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    ul {
+        text-align: center;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    p, ul li {
+        font-size: 0.9rem;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <section class="about-us">
+    <div class="container">
+        <h1>Welcome to Bite Buzz!</h1>
+        <p>At Bite Buzz, we believe that food is not just about satisfying hunger—it's about creating</p><p> delightful experiences. Whether you're craving a hearty meal, a quick snack,</p><p> or an exotic dish, we bring the best flavors to your doorstep with just a few taps.</p>
+
+        <h2>Our Mission</h2>
+        <p>We aim to revolutionize the way people order food by offering fast, reliable, and hassle-free service.</p><p> With real-time order updates, and a seamless shopping cart, it enhances convenience, accessibility,</p><p> and satisfaction, redefining the digital dining experience. </p>
+
+        <h2>Why Choose Us?</h2>
+        <ul>
+            <li><strong style="color: bisque;">Wide Selection:</strong> Many restaurants & cuisines to explore.</li>
+            <li><strong style="color: bisque;">Fast Delivery:</strong> Fresh food delivered hot and on time.</li>
+            <li><strong style="color: bisque;">Easy Ordering:</strong> User-friendly app & secure payment options.</li>
+            <li><strong style="color: bisque;">Customer-Centric:</strong> Your satisfaction is our priority!</li>
+        </ul>
+
+        <h2>Join Our Food Journey</h2>
+        <p>We are constantly evolving to bring the best food experiences to your doorstep. Whether you're a foodie, a busy </p><p>professional, or just looking for great meals—we've got you covered.</p>
+        <p>Download our app today and discover the joy of effortless food ordering!</p>
+    </div>
+  </section>
+</body>
+</html>  

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - BiteBuzz</title>
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <style>
+    .order-summary {
+      margin-top: 30px;
+    }
+
+    .order-summary h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .order-summary ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html" class="active"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>
+  </div>    
+    <div class="main">
+    <!--main navbar-->
+      <div class="main-navbar">
+        <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+         
+        <div class="profile" style="display: flex; align-items: center;">
+          <a class="cart" href="shopping-cart.html">
+            <ion-icon name="cart-outline"></ion-icon>
+            <span class="cart-count" id="cart-count">0</span>
+          </a>
+          <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+        </div>
+      </div>   
+             
+      <hr class="divider">
+      <header class="order-header">
+        <h1>Order Confirmation</h1>
+        <p>Please review your order details and proceed with payment.</p>
+      </header>
+      <section class="order-summary">
+        <h2><i class="fa-solid fa-receipt"></i> Your Order</h2>
+        <div id="cart-items-list">
+          <p></p>
+        </div>
+        <h3>Total Price: ₹<span id="cart-total-price">0.00</span></h3>
+      </section>
+
+     <form id="order-form" action="order-confirmation.php" method="POST"> 
+      <!-- Order Confirmation Form -->
+      <section class="order-confirmation">
+        <h2><i class="fa-solid fa-user"></i> Customer Details</h2>
+        
+          <div class="form-group">
+            <label for="customer-name">User Name:</label>
+            <input type="text" id="customer-name" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="customer-address">Address:</label>
+            <textarea id="customer-address" placeholder="Enter your delivery address" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="customer-phone">Phone:</label>
+            <input type="tel" id="customer-phone" placeholder="Enter your phone number" required>
+          </div>
+        </form>
+      </section>
+
+    <!-- Payment Section -->
+      <section class="payment-section">
+        <h2><i class="fa-solid fa-credit-card"></i> Payment Method</h2>
+        <form id="payment-form">
+          <div class="payment-options">
+            <label>
+              <input type="radio" name="payment-method" value="credit-card" required>
+              <i class="fa-solid fa-credit-card"></i> Credit/Debit Card
+            </label>
+            <label>
+              <input type="radio" name="payment-method" value="upi">
+              <i class="fa-brands fa-google-pay"></i> UPI
+            </label>
+            <label>
+              <input type="radio" name="payment-method" value="cod">
+              <i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery
+            </label>
+          </div>
+        </form>
+      </section>
+      <button type="submit" class="confirm-btn">Confirm Order</button>
+     </form>
+      <!-- Order Status Tracking -->
+      <section class="order-status">
+        <h2><i class="fa-solid fa-truck"></i> Order Status</h2>
+        <div class="status-tracker">
+          <div class="status-step completed">
+            <i class="fa-solid fa-shopping-cart"></i>
+            <p>Order Received</p>
+          </div>
+          <div class="status-step">
+            <i class="fa-solid fa-check-circle"></i>
+            <p>Order Placed</p>
+          </div>
+          <div class="status-step">
+            <i class="fa-solid fa-box"></i>
+            <p>Preparing</p>
+          </div>
+          <div class="status-step">
+            <i class="fa-solid fa-truck"></i>
+            <p>Out for Delivery</p>
+          </div>
+          <div class="status-step">
+            <i class="fa-solid fa-house"></i>
+            <p>Delivered</p>
+          </div>
+        </div>
+      </section>
+      
+    </div>
+
+    <div id="logout-modal" class="modal">
+      <div class="modal-content">
+        <h3>Are you sure you want to logout?</h3>
+        <div class="modal-actions">
+          <button id="logout-cancel" class="modal-btn">Cancel</button>
+          <button id="logout-yes" class="modal-btn">Logout</button>
+        </div>
+      </div>
+    </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // Restore customer details if present
+      const savedDetails = JSON.parse(localStorage.getItem("customerDetails") || "null");
+      if (savedDetails) {
+        document.getElementById("customer-name").value = savedDetails.name;
+        document.getElementById("customer-address").value = savedDetails.address;
+        document.getElementById("customer-phone").value = savedDetails.phone;
+        const pmRadio = document.querySelector(`input[name='payment-method'][value='${savedDetails.paymentMethod}']`);
+        if (pmRadio) pmRadio.checked = true;
+        restoreOrderStatus(savedDetails);
+     }
+      
+      const orderSummaryContainer = document.getElementById("cart-items-list");
+      const cartTotalPrice = document.getElementById("cart-total-price");
+
+    // Fetch cart items from localStorage
+      function fetchCartItems() {
+        const cartItems = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+        if (cartItems.length === 0) {
+            orderSummaryContainer.innerHTML = "<p>Your cart is empty.</p>";
+            return;
+        }
+
+        let cartHTML = "<ul>";
+        let totalPrice = 0;
+
+        cartItems.forEach(item => {
+            const itemTotalPrice = item.price * item.quantity;
+            totalPrice += itemTotalPrice;
+
+            cartHTML += `
+                <li>
+                    <p><b>${item.name}</b> (x ${item.quantity}) - ₹${itemTotalPrice.toFixed(2)}</p>
+                </li>
+            `;
+        });
+
+        cartHTML += "</ul>";
+        orderSummaryContainer.innerHTML = cartHTML;
+        cartTotalPrice.textContent = totalPrice.toFixed(2);
+      }
+
+      fetchCartItems(); // Update order summary on page load
+  
+      const confirmOrderBtn = document.querySelector(".confirm-btn");
+      const orderStatusSteps = document.querySelectorAll(".status-step");
+      //const feedbackForm = document.getElementById("feedbackForm");
+
+    // Handle order confirmation
+      confirmOrderBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Get user input
+        const name = document.getElementById("customer-name").value.trim();
+        const address = document.getElementById("customer-address").value.trim();
+        const phone = document.getElementById("customer-phone").value.trim();
+        const paymentMethod = document.querySelector("input[name='payment-method']:checked");
+
+        if (!name || !address || !phone || !paymentMethod) {
+            alert("Please fill out all fields before confirming the order.", "error");
+            return;
+        }
+        if (!/^[a-zA-Z\s]{10,}$/.test(name)) {
+            alert("❌ Enter full name and name should contain only letters and spaces.", "error");
+            return;
+        }
+
+        if (!/^\d{10}$/.test(phone)) {
+            alert("❌ Phone number must be **exactly** 10 digits.", "error");
+            return;
+        }
+        if (!/^[a-zA-Z0-9\s,.-]{30,}$/.test(address)) {
+            alert("❌ Enter complete address.", "error");
+            return;
+        }
+        
+        // Save customer details to localStorage
+        localStorage.setItem("customerDetails", JSON.stringify({
+          name,
+          address,
+          phone,
+          paymentMethod: paymentMethod.value,
+          placedTime: Date.now()
+      }));
+
+
+        // Show success message
+        alert("✅ Order Placed Successfully! 🚀", "success");
+        
+
+
+        // Simulate order status update
+        updateOrderStatusImmediate();
+      });
+
+      function updateOrderStatusImmediate() {
+        let index = 0;
+        const orderStatusSteps = document.querySelectorAll(".status-step");
+        // Mark "Order Received" and "Order Placed" as completed immediately
+        orderStatusSteps[0].classList.add("completed"); // Order Received
+        orderStatusSteps[1].classList.add("completed"); // Order Placed
+
+        setTimeout(() => {
+          orderStatusSteps[2].classList.add("completed"); // Preparing
+          // Send status update to backend
+          updateOrderStatusInBackend(orderId, "Preparing");
+        }, 4000); 
+      }
+
+      function restoreOrderStatus(details) {
+        const orderStatusSteps = document.querySelectorAll(".status-step");
+      // Always mark "Order Received" and "Order Placed"
+        orderStatusSteps[0].classList.add("completed");
+        orderStatusSteps[1].classList.add("completed");
+
+        // If passed since placedTime, mark "Preparing"
+        if (details.placedTime && Date.now() - details.placedTime >= 4000) {
+          orderStatusSteps[2].classList.add("completed");
+          // Send status update to backend
+           updateOrderStatusInBackend(orderId, "Preparing");
+        } else if (details.placedTime) {
+        // Schedule the update 
+          setTimeout(() => {
+            orderStatusSteps[2].classList.add("completed");
+            // Send status update to backend
+            updateOrderStatusInBackend(orderId, "Preparing");
+          }, 4000 - (Date.now() - details.placedTime));
+        }
+      }
+
+      // Function to update order status in backend
+      function updateOrderStatusInBackend(orderId, status) {
+        fetch('update_order_status.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `order_id=${encodeURIComponent(orderId)}&status=${encodeURIComponent(status)}`
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (!data.success) {
+            console.error("Failed to update order status in backend:", data.message);
+          }
+        })
+        .catch(err => console.error("Error updating order status in backend:", err));
+      }
+
+
+    
+
+    // Function to show alerts
+      function showAlert(message, type) {
+        const alertBox = document.createElement("div");
+        alertBox.classList.add("alert", type);
+        alertBox.textContent = message;
+        document.body.appendChild(alertBox);
+
+        setTimeout(() => {
+            alertBox.remove();
+        }, 3000);
+      }
+    });
+  </script>
+
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+  <script src="order-confirmation.js"></script>
+  
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>
+

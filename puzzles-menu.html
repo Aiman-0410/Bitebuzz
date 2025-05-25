@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/puzzles/veg-grill-sand.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Grilled Veg Sandwich</h4>
+              <p class="detail-sub">A classic grilled sandwich filled with fresh vegetables, cheese, and tangy sauces.</p>
+              <p class="price">Rs.150</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Grilled Veg Sandwich',150)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/puzzles/chicken-club-sand.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Club Sandwich</h4>
+             <p class="detail-sub">A triple-layered sandwich with grilled chicken, lettuce, tomatoes, and mayonnaise.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Club Sandwich', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/paneer-tikka-sand.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Tikka Sandwich</h4>
+             <p class="detail-sub">A sandwich stuffed with marinated paneer tikka, onions, and capsicum, grilled to perfection.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Tikka Sandwich', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/veg-burger.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Classic Veg Burger</h4>
+             <p class="detail-sub">A crispy veggie patty topped with lettuce, tomatoes, and mayonnaise, served in a soft bun.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Classic Veg Burger', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/cheesy-chick-burg.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Cheesy Chicken Burger</h4>
+             <p class="detail-sub">A juicy chicken patty topped with melted cheese, lettuce, and creamy sauce.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Cheesy Chicken Burger', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/french-fries.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>French Fries</h4>
+             <p class="detail-sub">Golden, crispy, and perfectly salted fries, available in small, medium, and large sizes.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('French Fries', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/cheesy-nachos.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Cheesy Nachos</h4>
+             <p class="detail-sub">Crispy nachos topped with melted cheese, jalapeños, and salsa.</p>
+             <p class="price">Rs.170</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Cheesy Nachos', 170)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/alfredo-pasta.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Creamy Alfredo Pasta</h4>
+             <p class="detail-sub">A rich and creamy white sauce pasta with fresh vegetables and herbs.</p>
+             <p class="price">Rs.220</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Creamy Alfredo Pasta', 220)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/potato-wedges.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Loaded Potato Wedges</h4>
+             <p class="detail-sub">Garlic bread topped with melted mozzarella cheese.</p>
+             <p class="price">Rs.160</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Loaded Potato Wedges', 160)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/arab-pasta.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Spicy Arrabbiata Pasta</h4>
+             <p class="detail-sub">A tangy red sauce pasta with a hint of spice, served with garlic bread.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Spicy Arrabbiata Pasta', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/cold-coffee.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Cold Coffee</h4>
+             <p class="detail-sub">A refreshing coffee drink blended with milk and ice, topped with whipped cream.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Cold Coffee', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/iced-lemon-tea.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Iced Lemon Tea</h4>
+             <p class="detail-sub">A chilled tea infused with lemon flavor, perfect for a refreshing break.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Iced Lemon Tea', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/strawberry-milkshake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Strawberry Milkshake</h4>
+             <p class="detail-sub">A creamy milkshake made with fresh strawberries and topped with whipped cream.</p>
+             <p class="price">Rs.149</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Strawberry Milkshake', 149)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/choco-brownie.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chocolate Brownie</h4>  
+             <p class="detail-sub">A rich and fudgy chocolate brownie served warm.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chocolate Brownie', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/blueberry-cheesecake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Blueberry Cheesecake</h4>
+             <p class="detail-sub">A creamy cheesecake topped with a layer of blueberry compote.</p>
+             <p class="price">Rs.250</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Blueberry Cheesecake', 250)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

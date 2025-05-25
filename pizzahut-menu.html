@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">     
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/pizzahut/margh-pizza.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Margherita Pizza</h4>
+              <p class="detail-sub">A classic pizza topped with fresh mozzarella cheese and tomato sauce.</p>
+              <p class="price">Rs.249</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Margherita Pizza', 249)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/pizzahut/farmhouse-pizza.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Farmhouse Pizza</h4>
+             <p class="detail-sub">A vegetarian pizza loaded with fresh vegetables like capsicum, onions, tomatoes, and mushrooms.</p>
+             <p class="price">Rs.399</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Farmhouse Pizza', 399)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/supreme-pizza.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Supreme Pizza</h4>
+             <p class="detail-sub">A pizza topped with grilled chicken, chicken sausage, and spicy chicken chunks.</p>
+             <p class="price">Rs.499</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Supreme Pizza', 499)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/veggie-supreme.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veggie Supreme Pizza</h4>
+             <p class="detail-sub">A pizza loaded with a variety of fresh vegetables and mozzarella cheese.</p>
+             <p class="price">Rs.499</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veggie Supreme Pizza', 499)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/pepperoni-pizza.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Pepperoni Pizza</h4>
+             <p class="detail-sub">A classic pizza topped with spicy pepperoni slices and mozzarella cheese.</p>
+             <p class="price">Rs.499</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Pepperoni Pizza', 499)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/paneer-tikka.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Tikka Pizza</h4>
+             <p class="detail-sub">A fusion pizza topped with marinated paneer cubes, onions, and capsicum.</p>
+             <p class="price">Rs.399</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Tikka Pizza', 399)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/bbq-chicken-pizza.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>BBQ Chicken Pizza</h4>
+             <p class="detail-sub">A smoky pizza topped with BBQ chicken, onions, and mozzarella cheese.</p>
+             <p class="price">Rs.499</p>
+             <button class="add-to-cart-btn" onclick="addToCart('BBQ Chicken Pizza', 499)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/garlic-sticks.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Garlic Breadsticks</h4>
+             <p class="detail-sub">Freshly baked breadsticks brushed with garlic butter and served with a cheesy dip.</p>
+             <p class="price">Rs.149</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Garlic Breadsticks', 149)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/garlic-bread.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Cheesy Garlic Bread</h4>
+             <p class="detail-sub">Garlic bread topped with melted mozzarella cheese.</p>
+             <p class="price">Rs.179</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Cheesy Garlic Bread', 179)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/chicken-wings.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Wings</h4>
+             <p class="detail-sub">Spicy and crispy chicken wings served with a tangy dipping sauce.</p>
+             <p class="price">Rs.249</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Wings', 249)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/veg-alfredo-pasta.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Alfredo Pasta</h4>
+             <p class="detail-sub">Creamy Alfredo pasta with fresh vegetables and a rich white sauce.</p>
+             <p class="price">Rs.249</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Alfredo Pasta', 249)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/ch-arab-pasta.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Arrabbiata Pasta</h4>
+             <p class="detail-sub">Spicy red sauce pasta with grilled chicken and herbs.</p>
+             <p class="price">Rs.299</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Arrabbiata Pasta', 299)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/choco-lava-cake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Choco Lava Cake</h4>
+             <p class="detail-sub">A warm chocolate cake with a gooey molten chocolate center.</p>
+             <p class="price">Rs.129</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Choco Lava Cake', 129)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/brownie-sundae.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Brownie Sundae</h4>
+             <p class="detail-sub">A rich brownie topped with vanilla ice cream and chocolate sauce.</p>
+             <p class="price">Rs.199</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Brownie Sundae', 199)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/pepsi">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Pepsi (500ml)</h4>
+             <p class="detail-sub">A refreshing carbonated drink to pair with your meal.</p>
+             <p class="price">Rs.60</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Pepsi (500ml)', 60)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

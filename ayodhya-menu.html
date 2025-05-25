@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+ 
+    
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/ayodhya-restaurant/paneer-tikka.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Paneer Tikka</h4>
+              <p class="detail-sub">Soft paneer cubes marinated in spiced yogurt and grilled with vegetables.</p>
+              <p class="price">Rs.250</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Paneer Tikka',250)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/ayodhya-restaurant/veg-manch.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Manchurian</h4>
+             <p class="detail-sub">Crispy vegetable balls tossed in a tangy and spicy Manchurian sauce.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Manchurian', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/hara-kabab.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Hara Bhara Kabab</h4>
+             <p class="detail-sub">A healthy kabab made with spinach, green peas, and spices, shallow-fried to perfection.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Hara Bhara Kabab', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/dal-makhani.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Dal Makhani</h4>
+             <p class="detail-sub">A creamy and rich lentil dish cooked with butter and aromatic spices.</p>
+             <p class="price">Rs.220</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Dal Makhani', 220)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/paneer-butter.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Butter Masala</h4>
+             <p class="detail-sub">Cottage cheese cooked in a creamy tomato and butter gravy, flavored with spices..</p>
+             <p class="price">Rs.250</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Butter Masala', 250)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/aloo-gobhi.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Aloo Gobi</h4>
+             <p class="detail-sub">A classic Indian dish made with potatoes and cauliflower, cooked with spices.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Aloo Gobi', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/bhindi-masala.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Bhindi Masala</h4>
+             <p class="detail-sub">Fresh okra cooked with onions, tomatoes, and spices, offering a flavorful vegetarian dish.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Bhindi Masala', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/veg-kofta-curry.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Kofta Curry</h4>
+             <p class="detail-sub">Soft vegetable dumplings cooked in a rich and creamy curry.</p>
+             <p class="price">Rs.240</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Kofta Curry', 240)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/veg-biryani.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Biryani</h4>
+             <p class="detail-sub">Aromatic basmati rice cooked with fresh vegetables, spices, and herbs.</p>
+             <p class="price">Rs.250</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Biryani', 250)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/jeera-rice.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Jeera Rice</h4>
+             <p class="detail-sub">Steamed basmati rice flavored with cumin seeds and ghee.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Jeera Rice', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/butter-naan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Butter Naan</h4>
+             <p class="detail-sub">Soft Indian bread brushed with butter, perfect for curries.</p>
+             <p class="price">Rs.40</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Butter Naan', 40)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/garlic-naan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Garlic Naan</h4>
+             <p class="detail-sub">Naan topped with minced garlic and butter, served hot.</p>
+             <p class="price">Rs.60</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Garlic Naan', 60)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/tandoori-roti.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Tandoori Roti</h4>
+             <p class="detail-sub">Whole wheat flatbread cooked in a tandoor, served fresh.</p>
+             <p class="price">Rs.30</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Tandoori Roti', 30)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/gulab-jamun.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Gulab Jamun</h4>
+             <p class="detail-sub">Soft and spongy milk-based dumplings soaked in sugar syrup.</p>
+             <p class="price">Rs.80</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Gulab Jamun', 80)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/rasgulla.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Rasgulla</h4>
+             <p class="detail-sub">Spongy and juicy cottage cheese balls soaked in sugar syrup.</p>
+             <p class="price">Rs.90</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Rasgulla', 90)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/mcdonald's/veg-tikki.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>McAloo Tikki Burger</h4>
+              <p class="detail-sub">A vegetarian burger with a spiced potato patty, fresh lettuce, and tangy sauce, served in a soft bun.</p>
+              <p class="price">Rs.140</p>
+              <button class="add-to-cart-btn" onclick="addToCart('McAloo Tikki Burger', 140)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/mcdonald's/mcchicken.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>McChicken Burger</h4>
+             <p class="detail-sub">A crispy chicken patty topped with lettuce and mayonnaise, served in a toasted sesame seed bun.</p>
+             <p class="price">Rs.160</p>
+             <button class="add-to-cart-btn" onclick="addToCart('McChicken Burger', 160)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/big-mac.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Big Mac</h4>
+             <p class="detail-sub">A double-layered burger with two beef patties, lettuce, cheese, pickles, onions, and special sauce.</p>
+             <p class="price">Rs.220</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Big Mac', 220)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/chick-mcwrap.avif">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken McWrap</h4>
+             <p class="detail-sub">Grilled or crispy chicken wrapped in a soft tortilla with lettuce, tomatoes, and creamy sauce.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken McWrap', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/veggie-mcwrap.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veggie McWrap</h4>
+             <p class="detail-sub">A vegetarian wrap with fresh veggies, tangy sauce, and a crispy veggie patty.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veggie McWrap', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/fries.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>French Fries</h4>
+             <p class="detail-sub">Golden, crispy, and perfectly salted fries, available in small, medium, and large sizes.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('French Fries', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/cheesy-fries.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Cheesy Fries</h4>
+             <p class="detail-sub">Crispy fries topped with melted cheese sauce for a delicious twist.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Cheesy Fries', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/nuggets.jpg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Nuggets</h4>
+             <p class="detail-sub">Bite-sized crispy chicken nuggets, served with your choice of dipping sauce.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Nuggets', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/coke-float.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Coke Float</h4>
+             <p class="detail-sub">A refreshing Coca-Cola topped with creamy vanilla soft serve.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Coke Float', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/iced-coffee.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Iced Coffee</h4>
+             <p class="detail-sub">A chilled coffee drink with a hint of sweetness, perfect for a quick pick-me-up.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Iced Coffee', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/strawberry-shake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Strawberry Shake</h4>
+             <p class="detail-sub">A creamy milkshake made with fresh strawberries and topped with whipped cream.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Strawberry Shake', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/mcflurry-oreo.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>McFlurry Oreo</h4>
+             <p class="detail-sub">Creamy vanilla soft serve blended with crushed Oreo cookies for a delightful dessert.</p>
+             <p class="price">Rs.190</p>
+             <button class="add-to-cart-btn" onclick="addToCart('McFlurry Oreo', 190)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+        </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/hot-fudge-sundae.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Hot Fudge Sundae</h4>
+             <p class="detail-sub">Vanilla soft serve topped with rich hot fudge and a drizzle of chocolate syrup.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Hot Fudge Sundae', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/ice-tea.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Lemon Ice Tea</h4>
+             <p class="detail-sub">A refreshing blend of aromatic tea infused with the crisp and tangy flavor of lemon, perfect for a rejuvenating drink.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Lemon Ice Tea', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/korean-burger.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Korean Mc Spicy Premium Chicken Burger</h4>
+             <p class="detail-sub">A premium burger featuring a spicy Korean-style chicken patty with gochujang sauce, fresh lettuce, and creamy sauce, served in a soft sesame seed bun.</p>
+             <p class="price">Rs.315</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Korean Mc Spicy Premium Chicken Burger', 315)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+           </div>  
+       </div>   
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

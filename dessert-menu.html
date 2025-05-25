@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+  
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/gulab-jamun.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Gulab Jamun</h4>
+             <p class="detail-sub">Soft and spongy milk-based dumplings soaked in sugar syrup.</p>
+             <p class="price">Rs.80</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Gulab Jamun', 80)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ayodhya-restaurant/rasgulla.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Rasgulla</h4>
+             <p class="detail-sub">Spongy and juicy cottage cheese balls soaked in sugar syrup.</p>
+             <p class="price">Rs.90</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Rasgulla', 90)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/pastry.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Black Forest Pastry</h4>
+             <p class="detail-sub">Rich and moist chocolate pastry layered with cream and cherries, topped with chocolate shavings.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Black Forest Pastry', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/ic-paradise/matka-kulfi.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Matka Kulfi</h4>
+              <p class="detail-sub">Traditional Indian frozen dessert made with thickened milk, flavored with cardamom, and served in an earthen pot for an authentic experience.</p>
+              <p class="price">Rs.89</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Matka Kulfi', 89)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/ic-paradise/choco-sundae.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chocolate Brownie Fudge Sundae</h4>
+             <p class="detail-sub">A rich sundae layered with chocolate brownie chunks, fudge sauce, and creamy ice cream, topped with nuts for a delightful treat.</p>
+             <p class="price">Rs.169</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chocolate Brownie Fudge Sundae', 169)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/mango-sundae.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mango Sundae</h4>
+             <p class="detail-sub">A refreshing sundae made with fresh mango pulp, creamy ice cream, and a drizzle of mango syrup, perfect for mango lovers.</p>
+             <p class="price">Rs.175</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mango Sundae', 175)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/coconut-ic.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Tenders Coconut Ice Cream</h4>
+             <p class="detail-sub">Creamy ice cream infused with the delicate flavor of tender coconut, offering a refreshing and tropical dessert experience.</p>
+             <p class="price">Rs.90</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Tenders Coconut Ice Cream', 90)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/kesar-pista-ic.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Kesar Pista Ice Cream</h4>
+             <p class="detail-sub">A rich and creamy ice cream flavored with saffron and pistachios, delivering a classic Indian dessert experience.</p>
+             <p class="price">Rs.90</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Kesar Pista Ice Cream', 90)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/chocochip-ic.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Choco Chips Ice Cream</h4>
+             <p class="detail-sub">Creamy vanilla ice cream loaded with crunchy chocolate chips, offering a perfect balance of sweetness and texture.</p>
+             <p class="price">Rs.90</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Choco Chips Ice Cream', 90)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/malaikf.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Malai Kulfi Falooda</h4>
+             <p class="detail-sub">A traditional Indian dessert with creamy kulfi, vermicelli, rose syrup, and nuts, served as a refreshing and indulgent treat.</p>
+             <p class="price">Rs.189</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Malai Kulfi Falooda', 189)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/mangofalooda.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mango Seasonal Falooda</h4>
+             <p class="detail-sub">A seasonal delight combining mango pulp, falooda, and creamy kulfi, topped with nuts and served chilled.</p>
+             <p class="price">Rs.229</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mango Seasonal Falooda', 229)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/kitkat-waffle.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>KitKat Waffle</h4>
+             <p class="detail-sub">A crispy waffle topped with KitKat pieces, drizzled with chocolate syrup, and served with a scoop of vanilla ice cream.</p>
+             <p class="price">Rs.169</p>
+             <button class="add-to-cart-btn" onclick="addToCart('KitKat Waffle', 169)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/triplecwaffle.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Triple Chocolate Waffle</h4>
+             <p class="detail-sub">A decadent waffle topped with dark, milk, and white chocolate, served with whipped cream and chocolate shavings.</p>
+             <p class="price">Rs.169</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Triple Chocolate Waffle', 169)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/nutella-waffle.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Nutella Waffle with Vanilla Ice Cream</h4>
+             <p class="detail-sub">A crispy waffle generously spread with Nutella, topped with vanilla ice cream, and drizzled with chocolate syrup.</p>
+             <p class="price">Rs.219</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Nutella Waffle with Vanilla Ice Cream', 219)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/mcflurry-oreo.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>McFlurry Oreo</h4>
+             <p class="detail-sub">Creamy vanilla soft serve blended with crushed Oreo cookies for a delightful dessert.</p>
+             <p class="price">Rs.190</p>
+             <button class="add-to-cart-btn" onclick="addToCart('McFlurry Oreo', 190)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+        </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/hot-fudge-sundae.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Hot Fudge Sundae</h4>
+             <p class="detail-sub">Vanilla soft serve topped with rich hot fudge and a drizzle of chocolate syrup.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Hot Fudge Sundae', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/gulab-jamun.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Gulab Jamun</h4>
+             <p class="detail-sub">Soft and spongy milk-based dumplings soaked in sugar syrup.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Gulab Jamun', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/phirni.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Phirni</h4>
+             <p class="detail-sub">A creamy rice pudding flavored with cardamom and garnished with nuts.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Phirni', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/only-fish/coconut-pudding.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Tender Coconut Pudding</h4>
+             <p class="detail-sub">A creamy dessert made with tender coconut and a hint of sweetness.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Tender Coconut Pudding', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/only-fish/caramel-pudding.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Caramel Pudding</h4>
+             <p class="detail-sub">A smooth and creamy pudding topped with caramel sauce.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Caramel Pudding', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/choco-lava-cake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Choco Lava Cake</h4>
+             <p class="detail-sub">A warm chocolate cake with a gooey molten chocolate center.</p>
+             <p class="price">Rs.129</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Choco Lava Cake', 129)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/brownie-sundae.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Brownie Sundae</h4>
+             <p class="detail-sub">A rich brownie topped with vanilla ice cream and chocolate sauce.</p>
+             <p class="price">Rs.199</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Brownie Sundae', 199)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/choco-brownie.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chocolate Brownie</h4>  
+             <p class="detail-sub">A rich and fudgy chocolate brownie served warm.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chocolate Brownie', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/blueberry-cheesecake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Blueberry Cheesecake</h4>
+             <p class="detail-sub">A creamy cheesecake topped with a layer of blueberry compote.</p>
+             <p class="price">Rs.250</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Blueberry Cheesecake', 250)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/the-sigdi/sigdi-gulab-jamun.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Gulab Jamun</h4>
+             <p class="detail-sub">Soft, spongy and delicious Indian dessert served with a generous helping of sugar syrup.</p>
+             <p class="price">Rs.60</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Gulab Jamun', 60)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/drnk-lab/aloo-burger.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Aloo Burger</h4>
+              <p class="detail-sub">A vegetarian burger with a crispy potato patty, fresh veggies, and flavorful sauces, served in a soft bun.</p>
+              <p class="price">Rs.120</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Aloo Burger', 120)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/drnk-lab/chicken-tandoorib.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Tandoori Burger</h4>
+             <p class="detail-sub">Juicy chicken patty marinated in tandoori spices, grilled to perfection, and served with fresh toppings and sauces in a toasted bun.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Tandoori Burger', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/paneer-burger.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Burger</h4>
+             <p class="detail-sub">A delicious burger with a crispy paneer patty, fresh vegetables, and tangy sauces, perfect for vegetarians.</p>
+             <p class="price">Rs.160</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Burger', 160)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/kfc/zinger-burger.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Zinger Burger</h4>
+             <p class="detail-sub">A crispy chicken fillet topped with lettuce and mayonnaise, served in a toasted sesame seed bun.</p>
+             <p class="price">Rs.199</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Zinger Burger', 199)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/kfc/double-down-b.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Double Down Burger</h4>
+             <p class="detail-sub">A unique burger with two crispy chicken fillets as buns, filled with cheese and sauce.</p>
+             <p class="price">Rs.249</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Double Down Burger', 249)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/kfc/veg-zinger-b.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Zinger Burger</h4>
+             <p class="detail-sub">A vegetarian burger with a crispy veggie patty, lettuce, and tangy sauce.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Zinger Burger', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+          <img class="detail-img" src="images/mcdonald's/veg-tikki.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>McAloo Tikki Burger</h4>
+              <p class="detail-sub">A vegetarian burger with a spiced potato patty, fresh lettuce, and tangy sauce, served in a soft bun.</p>
+              <p class="price">Rs.140</p>
+              <button class="add-to-cart-btn" onclick="addToCart('McAloo Tikki Burger', 140)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/mcdonald's/mcchicken.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>McChicken Burger</h4>
+             <p class="detail-sub">A crispy chicken patty topped with lettuce and mayonnaise, served in a toasted sesame seed bun.</p>
+             <p class="price">Rs.160</p>
+             <button class="add-to-cart-btn" onclick="addToCart('McChicken Burger', 160)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/big-mac.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Big Mac</h4>
+             <p class="detail-sub">A double-layered burger with two beef patties, lettuce, cheese, pickles, onions, and special sauce.</p>
+             <p class="price">Rs.220</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Big Mac', 220)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/korean-burger.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Korean Mc Spicy Premium Chicken Burger</h4>
+             <p class="detail-sub">A premium burger featuring a spicy Korean-style chicken patty with gochujang sauce, fresh lettuce, and creamy sauce, served in a soft sesame seed bun.</p>
+             <p class="price">Rs.315</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Korean Mc Spicy Premium Chicken Burger', 315)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+       </div> 
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/veg-burger.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Classic Veg Burger</h4>
+             <p class="detail-sub">A crispy veggie patty topped with lettuce, tomatoes, and mayonnaise, served in a soft bun.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Classic Veg Burger', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/cheesy-chick-burg.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Cheesy Chicken Burger</h4>
+             <p class="detail-sub">A juicy chicken patty topped with melted cheese, lettuce, and creamy sauce.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Cheesy Chicken Burger', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

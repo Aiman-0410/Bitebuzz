@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/niyaz/corn-soup.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Veg Sweet Corn Soup</h4>
+              <p class="detail-sub">A comforting soup made with sweet corn, fresh vegetables, and mild spices, offering a warm and flavorful start to your meal</p>
+              <p class="price">Rs.140</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Veg Sweet Corn Soup', 140)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/niyaz/chicken-sop.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Manchow Soup</h4>
+             <p class="detail-sub">A spicy and tangy soup with shredded chicken, vegetables, and crispy fried noodles, perfect for warming up your taste buds.</p>
+             <p class="price">Rs.160</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Manchow Soup', 160)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/murgtikka.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Murg Tikka Kabab</h4>
+             <p class="detail-sub">Tender chicken pieces marinated in aromatic spices and grilled to perfection, delivering a smoky and flavorful kabab experience.</p>
+             <p class="price">Rs.305</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Murg Tikka Kabab', 305)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/chicken-kabab.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Fried Kabab</h4>
+             <p class="detail-sub">Crispy fried chicken kababs seasoned with a blend of spices, offering a crunchy and juicy delight for kabab lovers.</p>
+             <p class="price">Rs.285</p>
+             <button class="add-to-cart-btn" onclick="addToCart('TChicken Fried Kabab', 285)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/veg-chilli.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Chilli</h4>
+             <p class="detail-sub">A spicy Indo-Chinese dish with stir-fried vegetables tossed in a tangy and flavorful chili sauce, perfect for spice enthusiasts.</p>
+             <p class="price">Rs.225</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Chilli', 225)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/paneer-schezwan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Schezwan</h4>
+             <p class="detail-sub">Soft paneer cubes cooked in a spicy Schezwan sauce, delivering a bold and flavorful Indo-Chinese experience.</p>
+             <p class="price">Rs.240</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Schezwan', 240)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/chick-hot-garlic.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Hot Garlic</h4>
+             <p class="detail-sub">Juicy chicken pieces cooked in a rich garlic sauce with a hint of spice, offering a savory and aromatic dish.</p>
+             <p class="price">Rs.305</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Hot Garlic', 305)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/chick-lollipop.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Lollipop</h4>
+             <p class="detail-sub">Crispy and juicy chicken drumsticks marinated in spices, fried to perfection, and served with a tangy dipping sauce.</p>
+             <p class="price">Rs.330</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Lollipop', 330)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/mutton-manch.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mutton Manchurian</h4>
+             <p class="detail-sub">Tender mutton pieces tossed in a spicy and tangy Manchurian sauce, offering a fusion of Indian and Chinese flavors.</p>
+             <p class="price">Rs.430</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mutton Manchurian', 430)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/veg-kadai.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Kadai</h4>
+             <p class="detail-sub">A flavorful vegetarian dish with mixed vegetables cooked in a rich and aromatic kadai masala, perfect with naan or rice.</p>
+             <p class="price">Rs.255</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Kadai', 255)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/paneer-makhanwala.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Makhanwala</h4>
+             <p class="detail-sub">Soft paneer cubes cooked in a creamy tomato-based gravy, flavored with butter and spices, delivering a rich and indulgent dish.</p>
+             <p class="price">Rs.300</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Makhanwala', 300)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/murg-akbari.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Murg Akbari</h4>
+             <p class="detail-sub">A royal chicken dish cooked in a creamy and mildly spiced gravy, offering a luxurious and flavorful dining experience.</p>
+             <p class="price">Rs.425</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Murg Akbari', 425)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/mutton-hyderabadi.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mutton Hyderabadi</h4>
+             <p class="detail-sub">A traditional Hyderabadi mutton curry cooked with aromatic spices and herbs, delivering a rich and authentic flavor.</p>
+             <p class="price">Rs.530</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mutton Hyderabadi', 530)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+        </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/butter-kulcha.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Butter Kulcha</h4>
+             <p class="detail-sub">Soft and fluffy Indian bread brushed with butter, perfect for pairing with rich gravies and curries.</p>
+             <p class="price">Rs.65</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Butter Kulcha', 65)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/butter-naan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Butter Naan</h4>
+             <p class="detail-sub">A classic Indian flatbread brushed with butter, soft and fluffy, ideal for scooping up flavorful curries.</p>
+             <p class="price">Rs.70</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Butter Naan', 70)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/ghee-rice.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Ghee Rice</h4>
+             <p class="detail-sub">Aromatic basmati rice cooked with ghee and whole spices, offering a fragrant and flavorful accompaniment to curries.</p>
+             <p class="price">Rs.210</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Ghee Rice', 210)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+       </div>  
+        <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/veg-biryani.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Biryani</h4>
+             <p class="detail-sub">A fragrant rice dish cooked with fresh vegetables, aromatic spices, and herbs, delivering a flavorful and satisfying vegetarian meal.</p>
+             <p class="price">Rs.305</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Biryani', 305)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div> 
+        </div>  
+        <div class="detail-card">
+         <img class="detail-img" src="images/niyaz/chicken-biryani.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Biryani</h4>
+             <p class="detail-sub">A classic biryani made with tender chicken, basmati rice, and a blend of aromatic spices, offering a rich and flavorful experience.</p>
+             <p class="price">Rs.270</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Biryani', 270)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>            
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

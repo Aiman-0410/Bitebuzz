@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+          <img class="detail-img" src="images/moonlight/chicken-tikka.jpeg">
+          <div class="detail-desc">
+            <div class="detail-name">
+              <h4>Chicken Tikka</h4>
+              <p class="detail-sub">Juicy chicken pieces marinated in yogurt and spices, grilled to perfection.</p>
+              <p class="price">Rs.350</p>
+              <button class="add-to-cart-btn" onclick="addToCart('Chicken Tikka',350)">Add to Cart</button>
+            </div>
+            <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+          </div>  
+        </div>
+        <div class="detail-card">
+          <img class="detail-img" src="images/moonlight/paneer-tikka.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Tikka</h4>
+             <p class="detail-sub">Soft paneer cubes marinated in spiced yogurt and grilled with vegetables.</p>
+             <p class="price">Rs.300</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Tikka', 300)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/mutton-seekh-kabab.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mutton Seekh Kabab</h4>
+             <p class="detail-sub">Minced mutton mixed with spices, shaped into skewers, and grilled.</p>
+             <p class="price">Rs.400</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mutton Seekh Kabab', 400)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/butter-chicken.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Butter Chicken</h4>
+             <p class="detail-sub">A creamy and mildly spiced chicken curry cooked in a rich tomato-based gravy.</p>
+             <p class="price">Rs.450</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Butter Chicken', 450)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/paneer-butter.jpeg">
+         <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Paneer Butter Masala</h4>
+             <p class="detail-sub">Cottage cheese cooked in a creamy tomato and butter gravy, flavored with spices..</p>
+             <p class="price">Rs.350</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Paneer Butter Masala', 350)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/mutton-rogan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mutton Rogan Josh</h4>
+             <p class="detail-sub">A traditional Kashmiri curry made with tender mutton and aromatic spices.</p>
+             <p class="price">Rs.500</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mutton Rogan Josh', 500)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/dal tadka.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Dal Tadka</h4>
+             <p class="detail-sub">Yellow lentils tempered with ghee, garlic, and spices, served hot.</p>
+             <p class="price">Rs.250</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Dal Tadka', 250)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/veg-kofta-curry.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Veg Kofta Curry</h4>
+             <p class="detail-sub">Soft vegetable dumplings cooked in a rich and creamy curry.</p>
+             <p class="price">Rs.300</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Veg Kofta Curry', 300)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/chicken-biryani.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Chicken Biryani</h4>
+             <p class="detail-sub">Aromatic basmati rice cooked with tender chicken and a blend of spices.</p>
+             <p class="price">Rs.400</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Chicken Biryani', 400)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/mutton-biryani.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mutton Biryani</h4>
+             <p class="detail-sub">Fragrant rice layered with spiced mutton and cooked to perfection.</p>
+             <p class="price">Rs.500</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mutton Biryani', 500)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/jeera-rice.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Jeera Rice</h4>
+             <p class="detail-sub">Steamed basmati rice flavored with cumin seeds and ghee.</p>
+             <p class="price">Rs.200</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Jeera Rice', 200)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/butter-naan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Butter Naan</h4>
+             <p class="detail-sub">Soft Indian bread brushed with butter, perfect for curries.</p>
+             <p class="price">Rs.50</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Butter Naan', 50)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/garlic-naan.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Garlic Naan</h4>
+             <p class="detail-sub">Naan topped with minced garlic and butter, served hot.</p>
+             <p class="price">Rs.70</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Garlic Naan', 70)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/gulab-jamun.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Gulab Jamun</h4>
+             <p class="detail-sub">Soft and spongy milk-based dumplings soaked in sugar syrup.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Gulab Jamun', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/moonlight/phirni.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Phirni</h4>
+             <p class="detail-sub">A creamy rice pudding flavored with cardamom and garnished with nuts.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Phirni', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

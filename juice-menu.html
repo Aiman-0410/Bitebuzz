@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>BiteBuzz</title>
+</head>
+<body>
+  <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+
+    <!--main-->
+  <div class="main">
+      <!--main navbar-->
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+      <div class="search">
+        <input type="text" placeholder="What you want to eat?" id="search-input" autocomplete="off" required>
+        <button class="search-btn">Search</button>
+      </div>  
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html" >
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+
+    
+    
+    <!-- Choose Order Section -->
+    <hr class="divider">
+    <div class="main-detail" id="choose-order-section">
+      <h2 class="main-title">Choose Order</h2>
+      <div class="detail-wrapper" id="menu-items">
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/mango-moito.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mango Mojito</h4>
+             <p class="detail-sub">Refreshing drink made with fresh mango, mint, lime, and soda, perfect for summer.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mango Mojito', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+        </div>
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/virgin-mojito.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Virgin Mojito</h4>
+             <p class="detail-sub">Classic non-alcoholic mojito with mint, lime, and soda, served chilled.</p>
+             <p class="price">Rs.150</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Virgin Mojito', 150)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+        </div>
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/oreo-shake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Oreo Thick Shake</h4>
+             <p class="detail-sub">A heavenly fusion of creamy cheesecake, indulgent Oreo cookies, and a swirl of decadent chocolate, pure bliss in a glass.</p>
+             <p class="price">Rs.185</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Oreo Thick Shake', 185)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+        </div>
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/pineapple-juice.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Pineapple Juice</h4>
+             <p class="detail-sub">Freshly squeezed pineapple juice, served chilled for a tropical refreshment.</p>
+             <p class="price">Rs.130</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Pineapple Juice', 130)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+        </div>
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/lassi.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>The Orginal Lassi</h4>
+             <p class="detail-sub">A timeless classic, blending creamy yogurt with a hint of sweetness, offering a refreshing and authentic taste of India.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('The Orginal Lassi', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+        </div>
+        <div class="detail-card">
+         <img class="detail-img" src="images/drnk-lab/strawberry.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Strawberry Cashew Smoothie</h4>
+             <p class="detail-sub">Creamy smoothie made with fresh strawberries, cashews, and a hint of sweetness.</p>
+             <p class="price">Rs.160</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Strawberry Cashew Smoothie', 160)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/rose-shake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Rose Gulkand Shake</h4>
+             <p class="detail-sub">A refreshing shake made with rose syrup, gulkand (rose petal preserve), and milk, offering a fragrant and sweet drink.</p>
+             <p class="price">Rs.179</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Rose Gulkand Shake', 179)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/butterscotch-shake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Butterscotch Shake</h4>
+             <p class="detail-sub">A creamy shake made with butterscotch syrup, milk, and crunchy praline pieces, delivering a sweet and nutty flavor.</p>
+             <p class="price">Rs.149</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Butterscotch Shake', 149)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/mint-oreo.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Mint Oreo Thick Shake</h4>
+             <p class="detail-sub">A refreshing thick shake made with Oreo cookies, mint essence, and creamy milk, topped with whipped cream.</p>
+             <p class="price">Rs.189</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Mint Oreo Thick Shake', 189)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/bubble-gum-shake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Bubble Gum Thick Shake</h4>
+             <p class="detail-sub">A fun and colorful thick shake with a bubble gum flavor, topped with whipped cream and sprinkles for a playful treat.</p>
+             <p class="price">Rs.189</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Bubble Gum Thick Shake', 189)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/ic-paradise/watermelon-juice.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Watermelon Juice</h4>
+             <p class="detail-sub">Freshly blended watermelon juice, served chilled, offering a hydrating and refreshing drink perfect for hot days.</p>
+             <p class="price">Rs.100</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Watermelon Juice', 100)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/coke-float.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Coke Float</h4>
+             <p class="detail-sub">A refreshing Coca-Cola topped with creamy vanilla soft serve.</p>
+             <p class="price">Rs.120</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Coke Float', 120)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/mcdonald's/strawberry-shake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Strawberry Shake</h4>
+             <p class="detail-sub">A creamy milkshake made with fresh strawberries and topped with whipped cream.</p>
+             <p class="price">Rs.180</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Strawberry Shake', 180)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/pizzahut/pepsi">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Pepsi (500ml)</h4>
+             <p class="detail-sub">A refreshing carbonated drink to pair with your meal.</p>
+             <p class="price">Rs.60</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Pepsi (500ml)', 60)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+       <div class="detail-card">
+         <img class="detail-img" src="images/puzzles/strawberry-milkshake.jpeg">
+          <div class="detail-desc">
+           <div class="detail-name">
+             <h4>Strawberry Milkshake</h4>
+             <p class="detail-sub">A creamy milkshake made with fresh strawberries and topped with whipped cream.</p>
+             <p class="price">Rs.149</p>
+             <button class="add-to-cart-btn" onclick="addToCart('Strawberry Milkshake', 149)">Add to Cart</button>
+           </div>
+           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+         </div>            
+       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-yes" class="modal-btn">Yes</button>
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+    // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+    // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html> 

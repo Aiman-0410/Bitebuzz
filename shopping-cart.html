@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <title>Shopping Cart</title>
+  
+</head>
+<body>
+    <div class="sidebar">
+    <h1 class="logo1">BiteBuzz</h1>
+    <div class="sidebar-menus">
+      <a href="homepage.html" class="active"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+      <a href="menu.html"><ion-icon name="menu-outline"></ion-icon>Menu</a>
+      <a href="order-confirmation.html"><ion-icon name="receipt-outline"></ion-icon>Order</a>
+      <a href="about-us.html"><ion-icon name="information-circle-outline"></ion-icon>About Us</a>
+      <a href="contact-us.html"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+      <a href="feedback.html"><ion-icon name="chatbox-ellipses-outline"></ion-icon>Feedback</a>
+    </div>
+    <div class="sidebar-logout">
+      <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+    </div>  
+  </div>
+  <div class="main">
+    <div class="main-navbar">
+      <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+        
+       
+      <div class="profile">
+        <a class="cart" href="shopping-cart.html" onclick="updateCartCount()">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+        <a class="user" href="user-profile.html"><ion-icon name="person-outline"></ion-icon></a>
+      </div>
+    </div>  
+    <hr class="divider">
+    <h1 style="margin-top: 40px; font-size: 3rem;">Food Cart</h1>
+    <table id="shoppingCartTable">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Price (₹)</th>
+          <th>Total Price (₹)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Items will be dynamically added here -->
+      </tbody>
+    </table>
+    <div class="cart-summary">
+      <button id="order-now-btn" class="order-btn">Order Now</button>
+      <h3>Total Price: ₹<span id="cart-total-price">0.00</span></h3>
+    </div>  
+  </div>
+   <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+      <h3>Are you sure you want to logout?</h3>
+      <div class="modal-actions">
+        <button id="logout-cancel" class="modal-btn">Cancel</button>
+        <button id="logout-yes" class="modal-btn">Logout</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.getElementById('logout-yes').addEventListener('click', function() {
+      // Redirect to the login page or perform logout action
+      //window.location.href = 'login.html';
+    //});
+    document.getElementById('logout-cancel').addEventListener('click', function() {
+      // Close the modal
+      document.getElementById('logout-modal').style.display = 'none';
+    });
+    document.querySelector('.sidebar-logout a').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
+    });
+    // Order Now Button Functionality
+    /*document.getElementById('order-now-btn').addEventListener('click', function() {
+      if (cartItems.length === 0) {
+        alert('Your cart is empty. Please add items to your cart before placing an order.');
+        return;
+      }
+
+      // Show a loading animation or confirmation message
+      const orderButton = document.getElementById('order-now-btn');
+      orderButton.textContent = 'Processing...';
+      orderButton.disabled = true;
+
+      // Simulate order processing (e.g., redirect to confirmation page)
+      setTimeout(() => {
+        alert('Please select a payment method to proceed with your order.');
+        window.location.href = 'order-confirmation.html'; // Replace with your confirmation page
+      }, 2000);
+    });*/
+
+    
+
+  </script>
+  <script src="script1.js"></script>
+  <script src="logout1.js"></script>
+  <script src="cart1.js"></script>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</html>
