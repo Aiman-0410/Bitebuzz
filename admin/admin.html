@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BiteBuzz Admin</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo"><span>BiteBuzz</span><span style="color:#e74c3c;">Admin</span></div>
+    <a href="#" id="dashboardBtn" class="active"><span class="material-icons">dashboard</span>Dashboard</a>
+    <a href="#" id="restaurantsBtn"><span class="material-icons">store</span>Restaurants</a>
+    <a href="#" id="menuBtn"><span class="material-icons">restaurant_menu</span>Menu</a>
+    <a href="#" id="ordersBtn"><span class="material-icons">shopping_cart</span>Orders</a>
+    <a href="#" id="usersBtn"><span class="material-icons">people</span>Users</a>
+    <a href="#" id="changePasswordBtn"><span class="material-icons">lock</span>Change Password</a>
+    <a href="#" id="logoutBtn"><span class="material-icons">logout</span>Logout</a>
+  </div>
+  <div class="main-content">
+    <!-- Dashboard Section -->
+    <section id="dashboardSection">
+      <h1>Welcome, admin</h1>
+      <div class="stats">
+        <div class="stat-card">Total Users<br><span id="totalUsers">Loading...</span></div>
+        <div class="stat-card">Total Orders<br><span id="totalOrders">Loading...</span></div>
+        <div class="stat-card">Menu Items<br><span id="totalMenuItems">Loading...</span></div>
+      </div>
+       <h2>Recent Orders</h2>
+      <table id="dashboardOrdersTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Customer Phone</th>
+            <th>Payment Method</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table></section>
+
+    <!-- Restaurants Section -->
+    <section id="restaurantSection" style="display:none;">
+      <h2>Restaurant Management Panel</h2>
+      <button id="addRestaurantBtn" style="margin-bottom:15px;">Add Restaurant</button>
+      <table id="restaurantTable">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Location</th><th>Contact</th>
+            <th>Image</th><th>Cuisine</th><th>Rating</th><th>Price Range</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </section>
+    <!-- Edit Restaurant Modal -->
+   <!-- Edit Restaurant Modal -->
+<!-- Compact Edit Modal -->
+<!-- Edit Restaurant Modal -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Edit Restaurant</h2>
+    <form id="editForm" enctype="multipart/form-data" style="display: flex; flex-wrap: wrap; gap: 10px;">
+      <input type="hidden" id="restaurantId" name="id">
+
+      <div style="flex: 1 1 45%;">
+        <label for="editName">Name:</label>
+        <input type="text" id="editName" name="name" required>
+      </div>
+
+      <div style="flex: 1 1 45%;">
+        <label for="editLocation">Location:</label>
+        <input type="text" id="editLocation" name="location" required>
+      </div>
+
+      <div style="flex: 1 1 45%;">
+        <label for="editContact">Contact:</label>
+        <input type="text" id="editContact" name="contact" required>
+      </div>
+
+      <div style="flex: 1 1 45%;">
+        <label for="editCuisine">Cuisine:</label>
+        <input type="text" id="editCuisine" name="cuisine" required>
+      </div>
+
+      <div style="flex: 1 1 45%;">
+        <label for="editRating">Rating:</label>
+        <input type="number" id="editRating" name="rating" step="0.1" required>
+      </div>
+
+      <div style="flex: 1 1 45%;">
+        <label for="editPrice">Price Range:</label>
+        <input type="text" id="editPrice" name="price_range" required>
+      </div>
+
+      <div style="flex: 1 1 100%;">
+        <label for="editImage">Change Image (optional):</label>
+        <input type="file" id="editImage" name="image">
+      </div>
+
+      <div style="flex: 1 1 100%; text-align: right;">
+        <button type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<!-- Menu Management Section -->
+<!-- Menu Management Section -->
+<!-- Menu Management Section -->
+<section id="menuSection" style="display:none;">
+  <h2>Menu Management Panel</h2>
+  <button id="addMenuBtn" style="margin-bottom:15px;">Add Menu Item</button>
+  <table id="menuTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Restaurant</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<!-- Edit Menu Modal -->
+<!-- ✅ Shared Modal for BOTH Add and Edit -->
+<div id="menuModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+     background:white; padding:20px; border-radius:10px; z-index:999; box-shadow:0 0 10px rgba(0,0,0,0.2);">  <h3 id="menuModalTitle">Add Menu Item</h3>
+  <form id="menuForm" enctype="multipart/form-data">
+    <input type="hidden" name="id" id="menuId">
+
+    <label>Item Name:</label>
+    <input type="text" name="item_name" id="menuName" required>
+
+    <label>Restaurant Name:</label>
+    <input type="text" name="restaurant_name" id="menuRestaurant" required>
+
+    <label>Price:</label>
+    <input type="number" name="price" id="menuPrice" step="0.01" required>
+
+    <label>Image:</label>
+    <input type="file" name="image" id="menuImage">
+
+      <button type="submit" style="padding:8px 16px; background:#2ecc71; color:white; border:none; border-radius:5px;">Update</button>
+    <button type="button" onclick="document.getElementById('menuModal').style.display='none'" style="padding:8px 16px; background:#e74c3c; color:white; border:none; border-radius:5px;">Cancel</button>
+  </form>
+</div>
+<!-- ✅ Separate Edit Menu Modal -->
+<!-- ✅ Separate Edit Menu Modal -->
+<!-- Edit Menu Modal -->
+<!-- ✅ Shared Modal for BOTH Add and Edit -->
+<div id="menuModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+     background:white; padding:20px; border-radius:10px; z-index:999; box-shadow:0 0 10px rgba(0,0,0,0.2);">  <h3 id="menuModalTitle">Add Menu Item</h3>
+  <form id="menuForm" enctype="multipart/form-data">
+    <input type="hidden" name="id" id="menuId">
+
+    <label>Item Name:</label>
+    <input type="text" name="item_name" id="menuName" required>
+
+    <label>Restaurant Name:</label>
+    <input type="text" name="restaurant_name" id="menuRestaurant" required>
+
+    <label>Price:</label>
+    <input type="number" name="price" id="menuPrice" step="0.01" required>
+
+    <label>Image:</label>
+    <input type="file" name="image" id="menuImage">
+
+      <button type="submit" style="padding:8px 16px; background:#2ecc71; color:white; border:none; border-radius:5px;">Update</button>
+    <button type="button" onclick="document.getElementById('menuModal').style.display='none'" style="padding:8px 16px; background:#e74c3c; color:white; border:none; border-radius:5px;">Cancel</button>
+  </form>
+</div>
+
+
+
+    <!-- Orders Section -->
+<section id="ordersSection" style="display: none;">
+      <h2>Order Management Panel</h2>
+      <table id="ordersTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Customer Phone</th>
+            <th>Payment Method</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Users Section -->
+    <section id="usersSection" style="display:block;">
+      <h2>User Management Panel</h2>
+      <table id="usersTable">
+        <thead>
+          <tr>
+            <th>User ID</th><th>Name</th><th>Phone</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Change Password Section -->
+    <section id="changePasswordSection" style="display:none;">
+      <h2>Change Password</h2>
+      <form id="passwordForm">
+        <label>Current Password: <input type="password" id="currentPassword"></label><br>
+        <label>New Password: <input type="password" id="newPassword"></label><br>
+        <button type="submit">Change Password</button>
+        <div id="passwordMessage" style="display:none;"></div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Add Restaurant Modal -->
+  <div id="addRestaurantModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); align-items:center; justify-content:center; z-index:1000;">
+    <form id="addRestaurantForm" style="background:#fff; padding:32px 28px 20px 28px; border-radius:12px; min-width:340px; margin:auto; box-shadow:0 4px 24px rgba(44,62,80,0.18); display:flex; flex-direction:column; gap:12px;">
+      <h3 style="margin-bottom:10px; color:#2d3e50; text-align:center;">Add Restaurant</h3>
+      <input name="name" placeholder="Name" required style="padding:9px 12px; border:1px solid #d0d0d0; border-radius:6px;">
+      <input name="location" placeholder="Location" required style="padding:9px 12px; border:1px solid #d0d0d0; border-radius:6px;">
+      <input name="contact" placeholder="Contact" required style="padding:9px 12px; border:1px solid #d0d0d0; border-radius:6px;">
+      <input name="cuisine" placeholder="Cuisine" required style="padding:9px 12px; border:1px solid #d0d0d0; border-radius:6px;">
+      <input name="rating" type="number" step="0.1" min="0" max="5" placeholder="Rating" required style="padding:9px 12px; border:1px solid #d0d0d0; border-radius:6px;">
+      <input name="price_range" placeholder="Price Range" required style="padding:9px 12px; border:1px solid #d0d0d0; border-radius:6px;">
+      <input name="image" type="file" accept="image/*" required style="padding:6px 0;">
+      <div style="display:flex; gap:10px; justify-content:center; margin-top:8px;">
+        <button type="submit" style="background:#2d3e50; color:#fff; border:none; border-radius:6px; padding:8px 22px; font-weight:600; cursor:pointer;">Add</button>
+        <button type="button" id="closeAddModal" style="background:#e74c3c; color:#fff; border:none; border-radius:6px; padding:8px 22px; font-weight:600; cursor:pointer;">Cancel</button>
+      </div>
+      <div id="addRestaurantMsg" style="color:red; margin-top:8px; text-align:center;"></div>
+    </form>
+  </div>
+
+  <script src="orders.js"></script>
+
+  <script>
+    // Hide all sections
+    function hideAllSections() {
+      document.getElementById('dashboardSection').style.display = 'none';
+      document.getElementById('restaurantSection').style.display = 'none';
+      document.getElementById('menuSection').style.display = 'none';
+      document.getElementById('ordersSection').style.display = 'none';
+      document.getElementById('usersSection').style.display = 'none';
+      document.getElementById('changePasswordSection').style.display = 'none';
+    }
+
+    // Set active sidebar link
+    function setActive(element) {
+      document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Sidebar navigation with hash support
+    function showSectionById(sectionId, btnId, loadFn) {
+      hideAllSections();
+      document.getElementById(sectionId).style.display = 'block';
+      setActive(document.getElementById(btnId));
+      if (typeof loadFn === 'function') loadFn();
+      window.location.hash = sectionId;
+    }
+    document.getElementById('dashboardBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('dashboardSection', 'dashboardBtn');
+      fetchTotalOrders(); // <-- Add this line
+
+    });
+    document.getElementById('restaurantsBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('restaurantSection', 'restaurantsBtn', loadRestaurants);
+    });
+    document.getElementById('menuBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('menuSection', 'menuBtn', loadMenuItems); // ✅ Correct function name
+    });
+    document.getElementById('ordersBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('ordersSection', 'ordersBtn', loadOrders);
+    });
+    document.getElementById('usersBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('usersSection', 'usersBtn', loadUsers);
+    });
+    document.getElementById('changePasswordBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('changePasswordSection', 'changePasswordBtn');
+    });
+
+    // On page load, show section from hash or default to dashboard
+  window.onload = function() {
+  const hash = window.location.hash.substring(1);
+  switch (hash) {
+    case 'restaurantSection':
+      showSectionById('restaurantSection', 'restaurantsBtn', loadRestaurants);
+      break;
+    case 'menuSection':
+      showSectionById('menuSection', 'menuBtn', loadMenuItems); // ✅ Correct function name
+      break;
+    case 'ordersSection':
+      showSectionById('ordersSection', 'ordersBtn', loadOrders);
+      break;
+    case 'usersSection':
+      showSectionById('usersSection', 'usersBtn', loadUsers);
+      break;
+    case 'changePasswordSection':
+      showSectionById('changePasswordSection', 'changePasswordBtn'); // ✅ Correct ID reference
+      break;
+    default:
+      showSectionById('dashboardSection', 'dashboardBtn');
+  }
+};
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      localStorage.removeItem("isLoggedIn");
+      fetch('logout.php', { method: 'POST' });
+      window.location.href = "login.html";
+    });
+
+    // Example: Load Restaurants (AJAX)
+    function loadRestaurants() {
+      fetch('admin_get_restaurants.php')
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#restaurantTable tbody");
+          tbody.innerHTML = '';
+          data.forEach(r => {
+            const row = `
+              <tr>
+                <td>${r.restaurant_id}</td>
+                <td>${r.name}</td>
+                <td>${r.location}</td>
+                <td>${r.contact}</td>
+                <td><img src="${r.image_url}" alt="${r.name}" width="60"/></td>
+                <td>${r.cuisine}</td>
+                <td>${r.rating}</td>
+                <td>${r.price_range}</td>
+                <td>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                  </td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        })
+        .catch(error => console.error("Error fetching restaurants:", error));
+    }
+
+    // Example: Load Menu Items (AJAX)
+    function loadMenu() {
+      fetch('admin_get_menu.php')
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#menuTable tbody");
+          tbody.innerHTML = '';
+          data.forEach(item => {
+            const row = `
+              <tr>
+                <td>${item.menu_id}</td>
+                <td>${item.name}</td>
+                <td>${item.restaurant_name}</td>
+                <td>${item.price}</td>
+                <td>${item.category}</td>
+                <td><img src="${item.image_url}" alt="${item.name}" width="60"/></td>
+                <td><button>Edit</button></td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        })
+        .catch(error => console.error("Error fetching menu:", error));
+    }
+
+    // Example: Load Orders (AJAX)
+    function loadOrders() {
+      fetch('admin_get_orders.php')
+        .then(response => response.json())
+        .then(data => {
+          if (!data.success) {
+            console.error("Failed to fetch orders:", data.message);
+            return;
+          }
+
+          // Management panel table
+          const mgmtTbody = document.querySelector("#ordersTable tbody");
+          // Dashboard table
+          const dashTbody = document.querySelector("#dashboardOrdersTable tbody");
+
+          mgmtTbody.innerHTML = '';
+          dashTbody.innerHTML = '';
+
+          if (!Array.isArray(data.data) || data.data.length === 0) {
+            const emptyRow = '<tr><td colspan="6">No orders available.</td></tr>';
+            mgmtTbody.innerHTML = emptyRow;
+            dashTbody.innerHTML = emptyRow;
+            return;
+          }
+
+          data.data.forEach(order => {
+            // Management panel row
+            const mgmtRow = `
+              <tr>
+                <td>${order.order_id}</td>
+                <td>${order.customer_name}</td>
+                <td>${order.customer_phone}</td>
+                <td>${order.payment_method}</td>
+                <td class="order-status-cell">${order.status}</td>
+                <td><button class="edit-order-btn">Edit</button></td>
+              </tr>
+            `;
+            mgmtTbody.innerHTML += mgmtRow;
+          });
+            // Dashboard row (no edit button)
+          const recentOrders = data.data.slice(-5).reverse();
+          recentOrders.forEach(order => {
+            const dashRow = `
+              <tr>
+                <td>${order.order_id}</td>
+                <td>${order.customer_name}</td>
+                <td>${order.customer_phone}</td>
+                <td>${order.payment_method}</td>
+                <td>${order.status}</td>
+                <td></td>
+              </tr>
+            `;
+            dashTbody.innerHTML += dashRow;
+             
+          });
+
+          attachOrderEditListeners();
+        })
+        .catch(error => console.error("Error fetching orders:", error));
+      }
+    // ✅ Ensure orders load when the page opens
+
+    // Example: Load Users (AJAX)
+    function loadUsers() {
+      fetch('admin_get_users.php')
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#usersTable tbody");
+          tbody.innerHTML = '';
+          data.forEach(user => {
+            const row = `
+              <tr>
+                <td>${user.user_id}</td>
+                <td>${user.name}</td>
+                <td>${user.phone}</td>
+                <td><button>Edit</button></td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        })
+        .catch(error => console.error("Error fetching users:", error));
+    }
+
+    // Change Password Example
+    document.getElementById("passwordForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const msg = document.getElementById("passwordMessage");
+      const current = document.getElementById("currentPassword").value.trim();
+      const newPass = document.getElementById("newPassword").value.trim();
+
+      if (!current || !newPass) {
+        msg.style.display = "block";
+        msg.textContent = "Please fill in both password fields.";
+        msg.style.color = "red";
+        return;
+      }
+
+      fetch('admin_change_password.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `current=${encodeURIComponent(current)}&new=${encodeURIComponent(newPass)}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          msg.style.display = "block";
+          if (data.success) {
+            msg.textContent = "Password changed successfully!";
+            msg.style.color = "green";
+            setTimeout(() => {
+              msg.style.display = "none";
+              document.getElementById("passwordForm").reset();
+            }, 1000);
+          } else {
+            msg.textContent = data.message || "Current password is incorrect.";
+            msg.style.color = "red";
+          }
+        })
+        .catch(() => {
+          msg.textContent = "An error occurred.";
+          msg.style.color = "red";
+          msg.style.display = "block";
+        });
+    });
+
+    // Inline Edit for Order Status (delegated, works for Edit and Save)
+    document.addEventListener('click', function(e) {
+      if (
+        e.target.tagName === 'BUTTON' &&
+        e.target.closest('#ordersTable')
+      ) {
+        const btn = e.target;
+        const row = btn.closest('tr');
+        const statusCell = row.children[3];
+
+        if (btn.textContent === 'Edit') {
+          const currentStatus = statusCell.textContent.trim();
+          const select = document.createElement('select');
+          select.className = 'status-select';
+          ['Pending', 'Preparing', 'Delivered'].forEach(status => {
+            const option = document.createElement('option');
+            option.value = status;
+            option.textContent = status;
+            if (status === currentStatus) option.selected = true;
+            select.appendChild(option);
+          });
+          statusCell.textContent = '';
+          statusCell.appendChild(select);
+          btn.textContent = 'Save';
+        } else if (btn.textContent === 'Save') {
+          const select = statusCell.querySelector('select');
+          if (select) {
+            statusCell.textContent = select.value;
+            btn.textContent = 'Edit';
+          }
+        }
+      }
+    });
+
+    // Show Add Restaurant Modal
+    document.getElementById('addRestaurantBtn').addEventListener('click', function() {
+      document.getElementById('addRestaurantModal').style.display = 'flex';
+    });
+
+    // Close Add Restaurant Modal
+    document.getElementById('closeAddModal').addEventListener('click', function() {
+      document.getElementById('addRestaurantModal').style.display = 'none';
+      document.getElementById('addRestaurantForm').reset();
+      document.getElementById('addRestaurantMsg').textContent = '';
+    });
+
+    // Add Restaurant Form Submission
+    document.getElementById('addRestaurantForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const msg = document.getElementById('addRestaurantMsg');
+
+      fetch('admin_add_restaurant.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            msg.style.color = 'green';
+            msg.textContent = 'Restaurant added successfully!';
+            setTimeout(() => {
+              msg.textContent = '';
+              document.getElementById('addRestaurantModal').style.display = 'none';
+              this.reset();
+              loadRestaurants();
+            }, 1000);
+          } else {
+            msg.style.color = 'red';
+            msg.textContent = data.message || 'Failed to add restaurant.';
+          }
+        })
+        .catch(() => {
+          msg.style.color = 'red';
+          msg.textContent = 'An error occurred.';
+        });
+    });
+  </script>
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('menuSection', 'menuBtn', loadMenuItems); // ✅ Ensures menu loads correctly
+    });
+
+
+    // Sidebar Navigation - Switch Sections
+    document.getElementById('dashboardBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('dashboardSection', 'dashboardBtn');
+      fetchTotalOrders(); // <-- Add this line
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showSectionById('menuSection', 'menuBtn', loadMenuItems);
+    });
+
+  
+
+    // ✅ Ensure orders load when the page opens
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("Loading Orders for Dashboard and Management Panel...");
+      fetchTotalOrders();
+      loadOrders(); // ✅ Ensures orders load when the page loads
+    });
+
+    // ✅ Ensure orders are loaded when switching to the Orders Panel
+    document.getElementById("ordersBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log("Orders Section Clicked: Loading Orders...");
+      showSectionById("ordersSection", "ordersBtn", loadOrders); // ✅ Load orders when switching to management panel
+    });
+  </script>
+   <!-- Edit Restaurant Modal -->
+
+  <script src="restaurant.js"></script> 
+  <script src="menu.js"></script>
+  <script src="users.js"></script>
+
+</body>
+</html>
