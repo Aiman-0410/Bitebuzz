@@ -5,6 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style1.css">
   <title>Shopping Cart</title>
+  <style>
+    .alert {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: linear-gradient(90deg, #0e6253 80%, #0e6253 100%);;
+      color: #f5f5f5;
+      padding: 18px 36px 18px 20px;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      box-shadow: 0 4px 24px rgba(46,204,113,0.15), 0 1.5px 6px rgba(0,0,0,0.08);
+      opacity: 0.98;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeInDown 0.5s;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translate(-50%, -30px);}
+      to   { opacity: 0.98; transform: translate(-50%, 0);}
+    }
+
+    .alert.error { background: linear-gradient(90deg, #ffc107 80%, #ffc107 100%); }
+    .alert.success { background: linear-gradient(90deg, #0e6253 80%, #0e6253 100%); }
+
+
+    @media (max-width: 600px) {
+      .alert {
+        font-size: 0.8rem;
+        padding: 12px 10vw;
+        min-width: 0;
+        max-width: 98vw;
+        left: 50%;
+        top: 16px;
+      }
+    }
+  </style>
   
 </head>
 <body>
@@ -66,11 +108,15 @@
       </div>
     </div>
   </div>
-  <script>
-    //document.getElementById('logout-yes').addEventListener('click', function() {
-      // Redirect to the login page or perform logout action
-      //window.location.href = 'login.html';
-    //});
+  <script>    
+    document.getElementById('logout-yes').addEventListener('click', function() {
+      showAlert("👋You have been logged out successfully.", "success");
+      setTimeout(function() {
+      // Redirect to the login page
+        window.location.href = 'login.html';
+    }, 1500);
+
+    });
     document.getElementById('logout-cancel').addEventListener('click', function() {
       // Close the modal
       document.getElementById('logout-modal').style.display = 'none';
@@ -82,7 +128,7 @@
     // Order Now Button Functionality
     /*document.getElementById('order-now-btn').addEventListener('click', function() {
       if (cartItems.length === 0) {
-        alert('Your cart is empty. Please add items to your cart before placing an order.');
+        showAlert('Your cart is empty. Please add items to your cart before placing an order.');
         return;
       }
 
@@ -93,14 +139,14 @@
 
       // Simulate order processing (e.g., redirect to confirmation page)
       setTimeout(() => {
-        alert('Please select a payment method to proceed with your order.');
+        showAlert('Please select a payment method to proceed with your order.');
         window.location.href = 'order-confirmation.html'; // Replace with your confirmation page
       }, 2000);
     });*/
-
     
 
   </script>
+  
   <script src="script1.js"></script>
   <script src="logout1.js"></script>
   <script src="cart1.js"></script>

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const review = document.getElementById("feedback").value.trim();
 
         if (!username || !rating || !review) {
-            alert("❌ Please provide your name, a rating, and a review.");
+            showAlert("❌ Please provide your name, a rating, and a review.");
             return;
         }
 
@@ -27,14 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await response.json();
 
             if (result.success) {
-                alert("✅ Thank you for your feedback! 😊");
+                showAlert("✅ Thank you for your feedback! 😊");
                 feedbackForm.reset();
             } else {
-                alert("❌ " + result.message);
+                showAlert("❌ " + result.message);
             }
         } catch (error) {
             console.error("Feedback Submission Error:", error);
-            alert("❌ Failed to submit feedback.");
+            showAlert("❌ Failed to submit feedback.");
         }
     });
 });

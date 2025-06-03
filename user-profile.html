@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - Bite Buzz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url(images/user-background.jpeg);
+            background-image: url(images1/user-background.jpeg);
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -169,16 +171,16 @@
 
     <div class="profile-container">
         <div class="profile-header">
-            <img id="selected-avatar" src="images/avatar1.jpeg" alt="User Avatar">
+            <img id="selected-avatar" src="images1/avatar1.jpeg" alt="User Avatar">
             <h1>User Profile</h1>
 
             <div class="avatar-selection">
                <p>Select an avatar:</p>
                <div class="avatars">
-                   <img class="avatar-option" src="images/avatar1.jpeg" alt="Avatar 1">
-                   <img class="avatar-option" src="images/avatar2.png" alt="Avatar 2">
-                   <img class="avatar-option" src="images/avatar3.png" alt="Avatar 3">
-                   <img class="avatar-option" src="images/avatar4.png" alt="Avatar 4">
+                   <img class="avatar-option" src="images1/avatar1.jpeg" alt="Avatar 1">
+                   <img class="avatar-option" src="images1/avatar2.png" alt="Avatar 2">
+                   <img class="avatar-option" src="images1/avatar3.png" alt="Avatar 3">
+                   <img class="avatar-option" src="images1/avatar4.png" alt="Avatar 4">
                </div>
             </div>
         </div>
@@ -209,7 +211,7 @@
           .then(response => response.json())
           .then(data => {
             if (data.message) {
-              alert(data.message);
+              showAlert(data.message);
               return;
             }
 
@@ -217,7 +219,7 @@
             document.getElementById("email").value = data.email || "";
             document.getElementById("phone").value = data.phone || "";
             document.getElementById("address").value = data.address || "";
-            document.getElementById("selected-avatar").src = data.avatar || "images/avatar1.jpeg";
+            document.getElementById("selected-avatar").src = data.avatar || "images1/avatar1.jpeg";
           })
           .catch(error => console.error("Failed to fetch profile:", error));
         });
@@ -240,7 +242,7 @@
           .then(response => response.json())
           .then(result => {
             console.log("Server response:", result);
-            alert(result.message);
+            showAlert(result.message);
           })
           .catch(error => console.error("Error in profile update:", error));
         });
@@ -260,7 +262,19 @@
             }, 500);
           });
         });
+        // --- Alert function ---
+    function showAlert(message, type) {
+      document.querySelectorAll('.alert').forEach(el => el.remove());
+      const alertBox = document.createElement("div");
+      alertBox.classList.add("alert", type);
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+        alertBox.remove();
+      }, 3000);
+    }
 
     </script>
+    
 </body>
 </html>

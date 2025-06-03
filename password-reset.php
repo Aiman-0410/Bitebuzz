@@ -31,5 +31,5 @@ $stmt->bind_param("ss", $username, $new_password);
 $stmt->execute();
 
 
-echo json_encode(["status" => "success", "message" => "Password reset successfully"]);
+echo json_encode(["status" => "success", "message" => "🔒 Password reset successfully"]);
 ?>

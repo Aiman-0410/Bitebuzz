@@ -23,6 +23,85 @@
       padding: 0;
       margin: 0;
     }
+    .alert {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: linear-gradient(90deg, #0e6253 80%, #0e6253 100%);;
+      color: #f5f5f5;
+      padding: 18px 36px 18px 20px;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      box-shadow: 0 4px 24px rgba(46,204,113,0.15), 0 1.5px 6px rgba(0,0,0,0.08);
+      opacity: 0.98;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeInDown 0.5s;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translate(-50%, -30px);}
+      to   { opacity: 0.98; transform: translate(-50%, 0);}
+    }
+
+    .alert.error { background: linear-gradient(90deg, #ffc107 80%, #ffc107 100%); }
+    .alert.success { background: linear-gradient(90deg, #0e6253 80%, #0e6253 100%); }
+
+    .alert.confirm-alert button {
+      background: #f5f5f5;
+      color: #0e6253;
+      border: 1px solid #0e6253;
+      border-radius: 4px;
+      padding: 4px 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s, color 0.2s;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .alert.confirm-alert .alert-message {
+      flex: 1 1 100%;
+    }
+    .alert.confirm-alert .alert-actions {
+      display: flex;
+      gap: 8px;
+      margin-left: 16px;
+    }
+    .alert.confirm-alert button:hover {
+      background: #ffc107;
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .alert {
+        font-size: 1rem;
+        padding: 12px 10vw;
+        min-width: 0;
+        max-width: 98vw;
+        left: 50%;
+        top: 16px;
+      }
+      .alert.confirm-alert {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        padding: 12px 4vw;
+      }
+      .alert.confirm-alert .alert-message {
+        margin-bottom: 12px;
+      }
+      .alert.confirm-alert .alert-actions {
+        justify-content: center;
+        margin-left: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -122,7 +201,7 @@
             <p>Order Placed</p>
           </div>
           <div class="status-step">
-            <i class="fa-solid fa-box"></i>
+            <i class="fa-solid fa-utensils"></i>
             <p>Preparing</p>
           </div>
           <div class="status-step">
@@ -148,10 +227,10 @@
       </div>
     </div>
   <script>
-    //document.getElementById('logout-yes').addEventListener('click', function() {
-    // Redirect to the login page or perform logout action
-      //window.location.href = 'login.html';
-    //});
+    document.getElementById('logout-yes').addEventListener('click', function() {
+     //Redirect to the login page or perform logout action
+      window.location.href = 'login.html';
+    });
     document.getElementById('logout-cancel').addEventListener('click', function() {
     // Close the modal
       document.getElementById('logout-modal').style.display = 'none';
@@ -161,173 +240,304 @@
       document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
     });
   
-
     document.addEventListener("DOMContentLoaded", function () {
+  // --- Helper functions ---
+  function saveOrderState(state) {
+    localStorage.setItem("activeOrder", JSON.stringify(state));
+  }
+  function getOrderState() {
+    return JSON.parse(localStorage.getItem("activeOrder") || "null");
+  }
+  function clearOrderState() {
+    localStorage.removeItem("activeOrder");
+  }
+  function setOrderFormDisabled(disabled) {
+    document.getElementById("customer-name").disabled = disabled;
+    document.getElementById("customer-address").disabled = disabled;
+    document.getElementById("customer-phone").disabled = disabled;
+    document.querySelectorAll("input[name='payment-method']").forEach(el => el.disabled = disabled);
+    document.querySelector(".confirm-btn").disabled = disabled;
+  }
+  function updateStatusStepsUI(status) {
+    const steps = document.querySelectorAll(".status-step");
+    steps.forEach((step, idx) => step.classList.remove("completed"));
+    if (status === "Order Received") steps[0].classList.add("completed");
+    if (status === "Order Placed")   { steps[0].classList.add("completed"); steps[1].classList.add("completed"); }
+    if (status === "Preparing")      { steps[0].classList.add("completed"); steps[1].classList.add("completed"); steps[2].classList.add("completed"); }
+    if (status === "Out for Delivery") { steps[0].classList.add("completed"); steps[1].classList.add("completed"); steps[2].classList.add("completed"); steps[3].classList.add("completed"); }
+    if (status === "Delivered")      steps.forEach(step => step.classList.add("completed"));
+  }
 
-      // Restore customer details if present
-      const savedDetails = JSON.parse(localStorage.getItem("customerDetails") || "null");
-      if (savedDetails) {
-        document.getElementById("customer-name").value = savedDetails.name;
-        document.getElementById("customer-address").value = savedDetails.address;
-        document.getElementById("customer-phone").value = savedDetails.phone;
-        const pmRadio = document.querySelector(`input[name='payment-method'][value='${savedDetails.paymentMethod}']`);
-        if (pmRadio) pmRadio.checked = true;
-        restoreOrderStatus(savedDetails);
-     }
-      
-      const orderSummaryContainer = document.getElementById("cart-items-list");
-      const cartTotalPrice = document.getElementById("cart-total-price");
-
-    // Fetch cart items from localStorage
-      function fetchCartItems() {
-        const cartItems = JSON.parse(localStorage.getItem("shoppingCart")) || [];
-
-        if (cartItems.length === 0) {
-            orderSummaryContainer.innerHTML = "<p>Your cart is empty.</p>";
-            return;
-        }
-
-        let cartHTML = "<ul>";
-        let totalPrice = 0;
-
-        cartItems.forEach(item => {
-            const itemTotalPrice = item.price * item.quantity;
-            totalPrice += itemTotalPrice;
-
-            cartHTML += `
-                <li>
-                    <p><b>${item.name}</b> (x ${item.quantity}) - ₹${itemTotalPrice.toFixed(2)}</p>
-                </li>
-            `;
-        });
-
-        cartHTML += "</ul>";
-        orderSummaryContainer.innerHTML = cartHTML;
-        cartTotalPrice.textContent = totalPrice.toFixed(2);
-      }
-
-      fetchCartItems(); // Update order summary on page load
+  function getCartKey() {
+    const username = localStorage.getItem('currentUser');
+    return username ? 'cart_' + username : 'cart_guest';
+  }
+  function getCartItems() {
+    return JSON.parse(localStorage.getItem(getCartKey()) || '[]');
+  }
   
-      const confirmOrderBtn = document.querySelector(".confirm-btn");
-      const orderStatusSteps = document.querySelectorAll(".status-step");
-      //const feedbackForm = document.getElementById("feedbackForm");
+  function fetchOrderStatus(orderId) {
+    return fetch(`get_order_status.php?order_id=${orderId}`)
+      .then(res => res.json())
+      .then(data => data.status);
+  }
 
-    // Handle order confirmation
-      confirmOrderBtn.addEventListener("click", function (event) {
-        event.preventDefault();
+  function updateOrderStatusInDB(orderId, status) {
+    fetch('admin/update_order_status.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `order_id=${encodeURIComponent(orderId)}&status=${encodeURIComponent(status)}`
+    });
+  }
 
-        // Get user input
-        const name = document.getElementById("customer-name").value.trim();
-        const address = document.getElementById("customer-address").value.trim();
-        const phone = document.getElementById("customer-phone").value.trim();
-        const paymentMethod = document.querySelector("input[name='payment-method']:checked");
+  // --- Order summary rendering ---
+  const orderSummaryContainer = document.getElementById("cart-items-list");
+  const cartTotalPrice = document.getElementById("cart-total-price");
+  function fetchCartItems() {
+    const orderState = getOrderState();
+    let cartItems;
+    // Show static order summary while order is active (not delivered/cancelled)
+    if (orderState && orderState.cartItems && orderState.status !== "Delivered") {
+      cartItems = orderState.cartItems;
+    } else {
+      cartItems = getCartItems(); // <-- Use the correct function here!
+    }
+    if (cartItems.length === 0) {
+      orderSummaryContainer.innerHTML = "<p>Your cart is empty.</p>";
+      cartTotalPrice.textContent = "0.00";
+      return;
+    } 
+    let cartHTML = "<ul>";
+    let totalPrice = 0;
+    cartItems.forEach(item => {
+      const itemTotalPrice = item.price * item.quantity;
+      totalPrice += itemTotalPrice;
+      cartHTML += `
+        <li>
+          <p><b>${item.name}</b> (x ${item.quantity}) - ₹${itemTotalPrice.toFixed(2)}</p>
+        </li>
+      `;
+    });
+    cartHTML += "</ul>";
+    orderSummaryContainer.innerHTML = cartHTML;
+    cartTotalPrice.textContent = totalPrice.toFixed(2);
+  }
+  fetchCartItems();
+  // --- Restore order info and status on page load ---
+  const orderState = getOrderState();
+  if (orderState && orderState.status !== "Delivered" && orderState.status !== "Cancelled") {
+    // Fill fields and disable editing
+    document.getElementById("customer-name").value = orderState.name;
+    document.getElementById("customer-address").value = orderState.address;
+    document.getElementById("customer-phone").value = orderState.phone;
+    document.querySelectorAll("input[name='payment-method']").forEach(el => {
+      el.checked = (el.value === orderState.paymentMethod);
+    });
+    setOrderFormDisabled(true);
 
-        if (!name || !address || !phone || !paymentMethod) {
-            alert("Please fill out all fields before confirming the order.", "error");
-            return;
-        }
-        if (!/^[a-zA-Z\s]{10,}$/.test(name)) {
-            alert("❌ Enter full name and name should contain only letters and spaces.", "error");
-            return;
-        }
+    // --- Immediately reflect correct status based on time ---
+    const now = Date.now();
+    let currentStatus = orderState.status;
+    if (now >= orderState.deliveredAt) {
+      currentStatus = "Delivered";
+    } else if (now >= orderState.outForDeliveryAt) {
+      currentStatus = "Out for Delivery";
+    } else if (now >= orderState.preparingAt) {
+      currentStatus = "Preparing";
+    } else if (now >= orderState.preparingAt - 60000) {
+      currentStatus = "Order Placed";
+    }
+    updateStatusStepsUI(currentStatus);
+    setOrderFormDisabled(currentStatus !== "Delivered");
+    if (currentStatus !== orderState.status) {
+      saveOrderState({ ...orderState, status: currentStatus });
+    }
+    if (currentStatus === "Delivered") {
+      setOrderFormDisabled(false);
+      clearOrderState();
+    }
 
-        if (!/^\d{10}$/.test(phone)) {
-            alert("❌ Phone number must be **exactly** 10 digits.", "error");
-            return;
-        }
-        if (!/^[a-zA-Z0-9\s,.-]{30,}$/.test(address)) {
-            alert("❌ Enter complete address.", "error");
-            return;
-        }
-        
-        // Save customer details to localStorage
-        localStorage.setItem("customerDetails", JSON.stringify({
+    // --- Set timers for future transitions only ---
+    if (currentStatus === "Order Placed" && now < orderState.preparingAt) {
+      setTimeout(() => {
+        showAlert("👨‍🍳 Your order is being prepared!", "success");
+        updateStatusStepsUI("Preparing");
+        saveOrderState({ ...getOrderState(), status: "Preparing" });
+      }, orderState.preparingAt - now);
+    }
+    if ((currentStatus === "Order Placed" || currentStatus === "Preparing") && now < orderState.outForDeliveryAt) {
+      setTimeout(() => {
+        showAlert("🚚 Your order is out for delivery!", "success");
+        updateStatusStepsUI("Out for Delivery");
+        saveOrderState({ ...getOrderState(), status: "Out for Delivery" });
+      }, orderState.outForDeliveryAt - now);
+    }
+    if (["Order Placed", "Preparing", "Out for Delivery"].includes(currentStatus) && now < orderState.deliveredAt) {
+      setTimeout(() => {
+        showAlert("🏠 Your order has been delivered successfully!", "success");
+        updateStatusStepsUI("Delivered");
+        setOrderFormDisabled(false);
+        clearOrderState();
+      }, orderState.deliveredAt - now);
+    }
+    // Show static cart
+    fetchCartItems();
+  }
+
+  let orderId = localStorage.getItem("latestOrderId"); // or get from your order placement response
+
+function pollOrderStatus() {
+  if (!orderId) return;
+  fetchOrderStatus(orderId).then(status => {
+    if (status) {
+      updateStatusStepsUI(status);
+      // Optionally, update local order state/status here
+      if (status === "Delivered" || status === "Cancelled") {
+        // Stop polling if order is finished
+        return;
+      }
+    }
+    setTimeout(pollOrderStatus, 10000); // poll every 10 seconds
+  });
+}
+
+// Start polling after order is placed
+pollOrderStatus();
+
+  // --- Confirmation dialog ---
+  function showOrderProceedConfirmation(onProceed, onCancel) {
+    document.querySelectorAll('.alert').forEach(el => el.remove());
+    const alertBox = document.createElement("div");
+    alertBox.classList.add("alert", "confirm-alert");
+    alertBox.innerHTML = `
+      <div class="alert-message" style="font-size:1rem; margin-bottom:8px;">❓ Do you want to proceed with your order?</div>
+      <div class="alert-actions">
+        <button id="proceed-btn" style="margin-right:8px;">Proceed</button>
+        <button id="cancel-btn">Cancel</button>
+      </div>
+    `;
+    document.body.appendChild(alertBox);
+    let timeoutId = setTimeout(() => {
+      alertBox.remove();
+      if (onProceed) onProceed();
+    }, 60000);
+    document.getElementById("proceed-btn").onclick = () => {
+      clearTimeout(timeoutId);
+      alertBox.remove();
+      if (onProceed) onProceed();
+    };
+    document.getElementById("cancel-btn").onclick = () => {
+      clearTimeout(timeoutId);
+      alertBox.remove();
+      if (onCancel) onCancel();
+    };
+  }
+
+  // --- Handle order confirmation ---
+  const confirmOrderBtn = document.querySelector(".confirm-btn");
+  confirmOrderBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    const cartItems = getCartItems();
+    const name = document.getElementById("customer-name").value.trim();
+    const address = document.getElementById("customer-address").value.trim();
+    const phone = document.getElementById("customer-phone").value.trim();
+    const paymentMethod = document.querySelector("input[name='payment-method']:checked");
+    if (!cartItems || cartItems.length === 0) {
+      showAlert("🛒 Your cart is empty. Please add items before confirming the order.", "error");
+      return;
+    }
+    if (!name || !address || !phone || !paymentMethod) {
+      showAlert("📝 Please fill out all fields before confirming the order.", "error");
+      return;
+    }
+    if (!/^[a-zA-Z\s]{10,}$/.test(name)) {  
+      showAlert("❌ Enter full name and name should contain only letters and spaces.", "error");
+      return;
+    }
+    if (!/^\d{10}$/.test(phone)) {
+      showAlert("❌ Phone number must be **exactly** 10 digits.", "error");
+      return;
+    }
+    if (!/^[a-zA-Z0-9\s,.-]{30,}$/.test(address)) {
+      showAlert("❌ Enter complete address.", "error");
+      return;
+    }
+    confirmOrderBtn.disabled = true;
+    showOrderProceedConfirmation(
+      function onProceed() {
+        confirmOrderBtn.disabled = true;
+        showAlert("✅ Order Placed Successfully! 🚀", "success");
+        // Save order info and cart snapshot
+        const cartItems = getCartItems();
+        const now = Date.now();
+        const orderState = {
           name,
           address,
           phone,
           paymentMethod: paymentMethod.value,
-          placedTime: Date.now()
-      }));
+          status: "Order Placed",
+          preparingAt: now + 60000,
+          outForDeliveryAt: now + 300000,
+          deliveredAt: now + 600000,
+          cartItems
+        };
+        saveOrderState(orderState);
+        setOrderFormDisabled(true);
+        updateStatusStepsUI("Order Placed");
 
-
-        // Show success message
-        alert("✅ Order Placed Successfully! 🚀", "success");
-        
-
-
-        // Simulate order status update
-        updateOrderStatusImmediate();
-      });
-
-      function updateOrderStatusImmediate() {
-        let index = 0;
-        const orderStatusSteps = document.querySelectorAll(".status-step");
-        // Mark "Order Received" and "Order Placed" as completed immediately
-        orderStatusSteps[0].classList.add("completed"); // Order Received
-        orderStatusSteps[1].classList.add("completed"); // Order Placed
-
+        const orderId = localStorage.getItem("latestOrderId"); // or get from your order placement response
+        // Timers for status updates
         setTimeout(() => {
-          orderStatusSteps[2].classList.add("completed"); // Preparing
-          // Send status update to backend
-          updateOrderStatusInBackend(orderId, "Preparing");
-        }, 4000); 
-      }
-
-      function restoreOrderStatus(details) {
-        const orderStatusSteps = document.querySelectorAll(".status-step");
-      // Always mark "Order Received" and "Order Placed"
-        orderStatusSteps[0].classList.add("completed");
-        orderStatusSteps[1].classList.add("completed");
-
-        // If passed since placedTime, mark "Preparing"
-        if (details.placedTime && Date.now() - details.placedTime >= 4000) {
-          orderStatusSteps[2].classList.add("completed");
-          // Send status update to backend
-           updateOrderStatusInBackend(orderId, "Preparing");
-        } else if (details.placedTime) {
-        // Schedule the update 
-          setTimeout(() => {
-            orderStatusSteps[2].classList.add("completed");
-            // Send status update to backend
-            updateOrderStatusInBackend(orderId, "Preparing");
-          }, 4000 - (Date.now() - details.placedTime));
-        }
-      }
-
-      // Function to update order status in backend
-      function updateOrderStatusInBackend(orderId, status) {
-        fetch('update_order_status.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `order_id=${encodeURIComponent(orderId)}&status=${encodeURIComponent(status)}`
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (!data.success) {
-            console.error("Failed to update order status in backend:", data.message);
-          }
-        })
-        .catch(err => console.error("Error updating order status in backend:", err));
-      }
-
-
-    
-
-    // Function to show alerts
-      function showAlert(message, type) {
-        const alertBox = document.createElement("div");
-        alertBox.classList.add("alert", type);
-        alertBox.textContent = message;
-        document.body.appendChild(alertBox);
-
+          showAlert("👨‍🍳 Your order is being prepared!", "success");
+          updateStatusStepsUI("Preparing");
+          saveOrderState({ ...getOrderState(), status: "Preparing" });
+          updateOrderStatusInDB(orderId, "Preparing");
+        }, 60000);
         setTimeout(() => {
-            alertBox.remove();
-        }, 3000);
+          showAlert("🚚 Your order is out for delivery!", "success");
+          updateStatusStepsUI("Out for Delivery");
+          saveOrderState({ ...getOrderState(), status: "Out for Delivery" });
+          updateOrderStatusInDB(orderId, "Out for Delivery");
+        }, 300000);
+        setTimeout(() => {
+          showAlert("🏠 Your order has been delivered successfully!", "success");
+          updateStatusStepsUI("Delivered");
+          setOrderFormDisabled(false);
+          clearOrderState();
+          updateOrderStatusInDB(orderId, "Delivered");
+        }, 600000);
+      },
+      function onCancel() {
+        const orderStatusSteps = document.querySelectorAll(".status-step");
+        orderStatusSteps.forEach((step, idx) => {
+          if (idx === 0) step.classList.add("completed");
+          else step.classList.remove("completed");
+        });
+        showAlert("❌ Order cancelled. You can place a new order.", "error");
+        confirmOrderBtn.disabled = false;
+        setOrderFormDisabled(false);
+        clearOrderState();
       }
-    });
+    );
+  });
+
+  // --- Alert function ---
+  function showAlert(message, type) {
+    document.querySelectorAll('.alert').forEach(el => el.remove());
+    const alertBox = document.createElement("div");
+    alertBox.classList.add("alert", type);
+    alertBox.textContent = message;
+    document.body.appendChild(alertBox);
+    setTimeout(() => {
+      alertBox.remove();
+    }, 3000);
+  }
+});
+  
   </script>
 
   <script src="script1.js"></script>
+  
   <script src="logout1.js"></script>
   <script src="order-confirmation.js"></script>
   
@@ -335,4 +545,3 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>
-

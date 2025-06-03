@@ -9,6 +9,10 @@ ini_set('display_errors', 1);
 $data = json_decode(file_get_contents("php://input"), true);
 error_log("Received Data: " . json_encode($data));
 
+if (empty($data['order_summary']) || count($data['order_summary']) === 0) {
+    die(json_encode(["success" => false, "message" => "Cart is empty."]));
+}
+
 if (empty($data) || !isset($data['customer_name'], $data['customer_address'], $data['customer_phone'], $data['payment_method'])) {
     die(json_encode(["status" => "error", "message" => "Invalid order data received", "debug" => json_encode($data)]));
 }
@@ -34,19 +38,31 @@ if ($user_row = $user_result->fetch_assoc()) {
     die(json_encode(["status" => "error", "message" => "User not found"]));
 }
 
-// Validate input fields
+// Validate input fields   
 $customer_name = trim($data['customer_name']);
 $customer_address = trim($data['customer_address']);
 $customer_phone = trim($data['customer_phone']);
+$order_summary = json_encode($data['order_summary'] ?? []);
 $payment_method = $data['payment_method'];
 $status = "Order Placed";
 $order_date = date("Y-m-d H:i:s");
 
+// Add backend validation
+if (!preg_match('/^[a-zA-Z\s]{10,}$/', $customer_name)) {
+    die(json_encode(["status" => "error", "message" => "Invalid name format"]));
+}
+if (!preg_match('/^\d{10}$/', $customer_phone)) {
+    die(json_encode(["status" => "error", "message" => "Invalid phone format"]));
+}
+if (!preg_match('/^[a-zA-Z0-9\s,.-]{30,}$/', $customer_address)) {
+    die(json_encode(["status" => "error", "message" => "Invalid address format"]));
+}
+
 // Insert order into the orders table (without `total_amount`)
-$order_sql = "INSERT INTO orders (user_id, customer_name, customer_address, customer_phone, payment_method, status, order_date) 
-              VALUES (?, ?, ?, ?, ?, ?, ?)";
+$order_sql = "INSERT INTO orders (user_id, customer_name, customer_address, customer_phone, order_summary, payment_method, status, order_date) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $order_stmt = $conn->prepare($order_sql);
-$order_stmt->bind_param("issssss", $user_id, $customer_name, $customer_address, $customer_phone, $payment_method, $status, $order_date);
+$order_stmt->bind_param("isssssss", $user_id, $customer_name, $customer_address, $customer_phone, $order_summary, $payment_method, $status, $order_date);
 
 if ($order_stmt->execute()) {
     $order_id = $order_stmt->insert_id;

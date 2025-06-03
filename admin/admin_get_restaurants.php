@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     // ✅ Fetch a single restaurant
     $id = $_GET['id'];
 
-    $stmt = $conn->prepare("SELECT * FROM restaurant WHERE restaurant_id = ?");
+    $stmt = $conn->prepare("SELECT * FROM restaurants WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
 }
 
 // ✅ If no ID is passed, fetch all restaurants
-$result = $conn->query("SELECT * FROM restaurant ORDER BY restaurant_id DESC");
+$result = $conn->query("SELECT * FROM restaurants ORDER BY id DESC");
 
 $restaurants = [];
 while ($row = $result->fetch_assoc()) {

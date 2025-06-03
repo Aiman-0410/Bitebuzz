@@ -326,6 +326,46 @@ form button[type="button"] {
   cursor: pointer;
 }
 
+
+/*#editModal .modal-content {
+    max-width: 500px;
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 18px 18px 18px;
+    box-shadow: 0 4px 24px rgba(44,62,80,0.18);
+    position: relative;
+}
+#editModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.3);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+#editModal.show {
+    display: flex !important;
+}
+#editModal .close {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    font-size: 24px;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    #editModal .modal-content {
+      max-width: 98vw;
+      padding: 12px 4vw;
+    }
+}*/
+
+
 /* ✅ Make modal form visually appealing */
 #editMenuModal {
   display: none;
@@ -361,7 +401,7 @@ form button[type="button"] {
   border-color: #2980b9;
   box-shadow: 0 0 5px rgba(41, 128, 185, 0.4);
 }
-.modal {
+/*.modal {
   display: none;
   position: fixed;
   top: 10%;
@@ -374,8 +414,11 @@ form button[type="button"] {
   max-width: 90%;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}*/
+.modal-content {
+  overflow-y: auto;
+  max-height: 90vh;
 }
-
 .modal-content label {
   display: block;
   margin-bottom: 5px;
@@ -389,12 +432,12 @@ form button[type="button"] {
 .modal {
   display: none;
   position: fixed;
-  top: 10%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 20px;
-  z-index: 999;
+  z-index: 9999;
   width: 400px;
   max-width: 90%;
   border-radius: 10px;
@@ -447,4 +490,28 @@ form button[type="button"] {
   .main-content {
     margin-left: 0;
   }
+}
+
+.category-select {
+  width: 95%;
+  padding: 8px 12px;
+  border: 1.5px solid #1976d2;
+  border-radius: 6px;
+  background: #f8f8f8;
+  color: #263544;
+  font-size: 1em;
+  margin-bottom: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%231976d2' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+.category-select:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px #e74c3c33;
 }

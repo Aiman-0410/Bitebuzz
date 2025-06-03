@@ -74,7 +74,7 @@ if (strlen($password) < 8) {
 $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? OR phone = ?");
 $stmt->bind_param("ss", $username, $phone);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->get_result();  
 
 if (mysqli_num_rows($result) > 0) {
     echo json_encode(["success" => false, "message" => "Username or phone already exists."]);

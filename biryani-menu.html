@@ -46,102 +46,6 @@
     <div class="main-detail" id="choose-order-section">
       <h2 class="main-title">Choose Order</h2>
       <div class="detail-wrapper" id="menu-items">
-       <div class="detail-card">
-         <img class="detail-img" src="images/ayodhya-restaurant/veg-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Veg Biryani</h4>
-             <p class="detail-sub">Aromatic basmati rice cooked with fresh vegetables, spices, and herbs.</p>
-             <p class="price">Rs.250</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Veg Biryani', 250)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/moonlight/chicken-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Chicken Biryani</h4>
-             <p class="detail-sub">Aromatic basmati rice cooked with tender chicken and a blend of spices.</p>
-             <p class="price">Rs.400</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Chicken Biryani', 400)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/moonlight/mutton-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Mutton Biryani</h4>
-             <p class="detail-sub">Fragrant rice layered with spiced mutton and cooked to perfection.</p>
-             <p class="price">Rs.500</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Mutton Biryani', 500)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-        <div class="detail-card">
-         <img class="detail-img" src="images/niyaz/veg-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Veg Biryani</h4>
-             <p class="detail-sub">A fragrant rice dish cooked with fresh vegetables, aromatic spices, and herbs, delivering a flavorful and satisfying vegetarian meal.</p>
-             <p class="price">Rs.305</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Veg Biryani', 305)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-          </div> 
-        </div>  
-        <div class="detail-card">
-         <img class="detail-img" src="images/niyaz/chicken-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Chicken Biryani</h4>
-             <p class="detail-sub">A classic biryani made with tender chicken, basmati rice, and a blend of aromatic spices, offering a rich and flavorful experience.</p>
-             <p class="price">Rs.270</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Chicken Biryani', 270)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-          </div>            
-        </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/only-fish/fish-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Fish Biryani</h4>
-             <p class="detail-sub">Aromatic basmati rice layered with spiced fish and cooked to perfection.</p>
-             <p class="price">Rs.550</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Fish Biryani', 550)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/only-fish/prawns-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Prawns Biryani</h4>
-             <p class="detail-sub">Fragrant rice cooked with juicy prawns and a blend of spices.</p>
-             <p class="price">Rs.600</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Prawns Biryani', 600)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/the-sigdi/sigdi-biryani.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Veg Biryani</h4>
-             <p class="detail-sub">A fragrant and flavorful basmati rice dish cooked with fresh vegetables, aromatic spices, and herbs.</p>
-             <p class="price">Rs.240</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Veg Biryani', 240)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>    
       </div>
     </div>
   </div>
@@ -150,16 +54,19 @@
     <div class="modal-content">
       <h3>Are you sure you want to logout?</h3>
       <div class="modal-actions">
-        <button id="logout-yes" class="modal-btn">Yes</button>
         <button id="logout-cancel" class="modal-btn">Cancel</button>
+        <button id="logout-yes" class="modal-btn">Logout</button>
       </div>
     </div>
   </div>
   <script>
-    //document.getElementById('logout-yes').addEventListener('click', function() {
+    document.getElementById('logout-yes').addEventListener('click', function() {
     // Redirect to the login page or perform logout action
-      //window.location.href = 'login.html';
-    //});
+      showAlert("👋You have been logged out successfully.", "success");
+      setTimeout( function() {
+        window.location.href = 'login.html';
+      }, 1500);
+    });
     document.getElementById('logout-cancel').addEventListener('click', function() {
     // Close the modal
       document.getElementById('logout-modal').style.display = 'none';
@@ -168,11 +75,53 @@
       event.preventDefault(); // Prevent default link behavior
       document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
     });
+
+   
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('get_menu.php?category=biryani')
+    .then(response => response.json())
+    .then(result => {
+      if (!result.success) return;
+      const data = result.data;
+      const container = document.getElementById('menu-items');
+      container.innerHTML = '';
+      data.forEach(item => {
+        container.innerHTML += `
+          <div class="detail-card">
+            <img class="detail-img" src="/bitebuzz/${item.image_url}" alt="${item.item_name}">
+            <div class="detail-desc">
+              <div class="detail-name">
+                <h4>${item.item_name}</h4>
+                <p class="detail-sub">${item.description || ''}</p>
+                <p class="price">Rs.${item.price}</p>
+                <button class="add-to-cart-btn" onclick="addToCart('${item.item_name.replace(/'/g,"\\'")}', ${item.price})">Add to Cart</button>
+              </div>
+              <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+            </div>
+          </div>
+        `;
+      });
+    });
+});
+
+
+    // --- Alert function ---
+    function showAlert(message, type) {
+      document.querySelectorAll('.alert').forEach(el => el.remove());
+      const alertBox = document.createElement("div");
+      alertBox.classList.add("alert", type);
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+        alertBox.remove();
+      }, 3000);
+    }
   </script>
-  <script src="script1.js"></script>
+  
+  <script src="script1.js"></script>  
   <script src="logout1.js"></script>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</html> 
+</html>

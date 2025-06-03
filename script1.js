@@ -17,24 +17,36 @@ if (mobile) {
     });
 }
 
+function getCartKey() {
+    const username = localStorage.getItem('currentUser');
+    return username ? 'cart_' + username : 'cart_guest';
+}
+
+function getCartItems() {
+    return JSON.parse(localStorage.getItem(getCartKey()) || '[]');
+}
+
+function setCartItems(cartItems) {
+    localStorage.setItem(getCartKey(), JSON.stringify(cartItems));
+}
+
 // Global cart items array to store cart data
-let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-cartItems = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+let cartItems = getCartItems();
+//cartItems = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
 
 // Function to add items to the cart
 function addToCart(itemName, itemPrice, buttonElement) {
     console.log(buttonElement); // Debugging: Check if the button element is passed correctly
 
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    let cartItems = getCartItems();
     const existingItem = cartItems.find(item => item.name === itemName);
     if (existingItem) {
         existingItem.quantity += 1; // Increment quantity if item already exists
     } else {
         cartItems.push({ name: itemName, price: itemPrice, quantity: 1 }); // Add new item
     }
-    localStorage.setItem('shoppingCart', JSON.stringify(cartItems));
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    setCartItems(cartItems);
     updateCartCount();
 
     // Change button text to "Added to Cart"
@@ -46,7 +58,7 @@ function addToCart(itemName, itemPrice, buttonElement) {
 
 // Function to update the cart count
 function updateCartCount() {
-    cartItems = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+    const cartItems = getCartItems();
 
     const cartCount = document.getElementById('cart-count');
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -57,12 +69,12 @@ function updateCartCount() {
 
 // Function to save cart data to localStorage
 function saveCartToLocalStorage() {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    localStorage.setItem("shoppingCart", JSON.stringify(cartItems));
+    setCartItems(cartItems);
 }
 
 // Function to render the cart items on the shopping cart page
 function renderCartItems() {
+    const cartItems = getCartItems();
     const cartTableBody = document.querySelector('#shoppingCartTable tbody');
     const cartTotalPrice = document.getElementById('cart-total-price');
 
@@ -73,7 +85,7 @@ function renderCartItems() {
 
     cartTableBody.innerHTML = ''; // Clear the table body
     let totalCartPrice = 0;
-    
+     
     cartItems.forEach((item, index) => {
         const itemTotalPrice = item.price * item.quantity;
         totalCartPrice += itemTotalPrice;
@@ -101,18 +113,20 @@ function renderCartItems() {
 
 // Function to handle quantity changes
 function updateQuantity(index, change) {
+    let cartItems = getCartItems();
     cartItems[index].quantity += change;
     if (cartItems[index].quantity <= 0) {
         cartItems.splice(index, 1); // Remove item if quantity is 0
     }
-    saveCartToLocalStorage();
+    setCartItems(cartItems);
     renderCartItems();
 }
 
 // Function to handle item removal
 function removeItem(index) {
+    let cartItems = getCartItems();
     cartItems.splice(index, 1);
-    saveCartToLocalStorage();
+    setCartItems(cartItems);
     renderCartItems();
 }
 
@@ -141,6 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Update cart count on page load
 document.addEventListener('DOMContentLoaded', updateCartCount);
+
+
 
 // Restaurant Card Click Event
 document.addEventListener('DOMContentLoaded', () => {
@@ -179,41 +195,34 @@ function loadMenuItems(restaurantName) {
     // Clear existing menu items
     menuItemsContainer.innerHTML = '';
 
-    // Get the menu for the selected restaurant
-    const restaurantMenus = {
-        // Example menu data
-        "Restaurant A": [
-            { name: "Veg Fried Rice", description: "Delicious fried rice with vegetables.", price: 220, image: "images/fried-rice.jpg" },
-            { name: "Paneer Tikka", description: "Grilled paneer with spices.", price: 250, image: "images/paneer-tikka.jpg" }
-        ],
-        "Restaurant B": [
-            { name: "Chicken Biryani", description: "Spicy chicken biryani.", price: 300, image: "images/chicken-biryani.jpg" },
-            { name: "Mutton Curry", description: "Rich mutton curry.", price: 350, image: "images/mutton-curry.jpg" }
-        ]
-    };
 
-    const menu = restaurantMenus[restaurantName];
-    if (!menu) {
-        console.error(`Menu not found for restaurant: ${restaurantName}`);
-        return;
-    }
-
-    // Dynamically create menu item cards
-    menu.forEach(item => {
-        const menuItem = document.createElement('div');
-        menuItem.classList.add('detail-card');
-        menuItem.innerHTML = `
-           <img class="detail-img" src="${item.image}" alt="${item.name}">
-           <div class="detail-desc">
-               <div class="detail-name">
-                   <h4>${item.name}</h4>
-                   <p class="detail-sub">${item.description}</p>
-                   <p class="price">Rs.${item.price}</p>
+    fetch(`admin/admin_get_menu.php?restaurant=${encodeURIComponent(restaurantName)}`)
+      .then(response => response.json())
+      .then(menu => {
+        if (!menu || menu.length === 0) {
+            menuItemsContainer.innerHTML = "<h3 style='text-align: center; color: red;'>No menu found for this restaurant</h3>";
+            return;
+        }
+        // Dynamically create menu item cards
+        menu.forEach(item => {
+            const menuItem = document.createElement('div');
+            menuItem.classList.add('detail-card');
+            menuItem.innerHTML = `
+               <img class="detail-img" src="${item.image}" alt="${item.name}">
+               <div class="detail-desc">
+                   <div class="detail-name">
+                       <h4>${item.name}</h4>
+                       <p class="detail-sub">${item.description}</p>
+                       <p class="price">Rs.${item.price}</p>
+                   </div>
+                   <button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price}, this)">Add to Cart</button>
                </div>
-               <button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price}, this)">Add to Cart</button>
-           </div>
-        `;
-        menuItemsContainer.appendChild(menuItem);
+            `;
+            menuItemsContainer.appendChild(menuItem);
+        });
+      })
+      .catch(() => {
+        menuItemsContainer.innerHTML = "<h3 style='text-align: center; color: red;'>Failed to load menu</h3>";
     });
 }
 

@@ -21,7 +21,7 @@ if(isset($_SESSION['username'])) { // Assume the session holds the username
 
         if ($stmt->execute()) {
             session_destroy(); // End session
-            echo json_encode(["success" => true]);
+            echo json_encode(["success" => true, "message" => "👋You have been logged out successfully."]);
         } else {
             echo json_encode(["success" => false, "error" => $stmt->error]);
         }

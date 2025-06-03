@@ -3,18 +3,20 @@ include 'db_config.php';
 header('Content-Type: application/json');
 
 $item_name = $_POST['item_name'] ?? '';
+$category = $_POST['category'] ?? '';
 $restaurant_name = $_POST['restaurant_name'] ?? ''; // ✅ Name entered by user
 $price = $_POST['price'] ?? '';
+$description = $_POST['description'] ?? '';
 $image_url = '';
 
 // ✅ Validate required fields
-if (!$item_name || !$restaurant_name || !$price) {
+if (!$item_name || !$restaurant_name || !$price || !$description) {
     echo json_encode(['success' => false, 'message' => 'All fields are required']);
     exit;
 }
 
 // ✅ Convert restaurant name into restaurant ID
-$stmt = $conn->prepare("SELECT restaurant_id FROM restaurant WHERE name = ?");
+$stmt = $conn->prepare("SELECT id FROM restaurants WHERE TRIM(LOWER(name)) = TRIM(LOWER(?))");
 $stmt->bind_param("s", $restaurant_name);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -25,13 +27,13 @@ if (!$restaurant) {
     exit;
 }
 
-$restaurant_id = $restaurant['restaurant_id']; // ✅ Get actual restaurant ID
+$restaurant_id = $restaurant['id']; // ✅ Get actual restaurant ID
 
 // ✅ Handle image upload
 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
     $fileExt = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
     $imgName = uniqid("menu_") . '.' . $fileExt;
-    $targetDir = __DIR__ . '/images/';
+    $targetDir = dirname(__DIR__) . '/images/';
     $targetFile = $targetDir . $imgName;
 
     if (!is_dir($targetDir)) {
@@ -47,8 +49,8 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
 }
 
 // ✅ Insert into menu table using restaurant_id
-$stmt = $conn->prepare("INSERT INTO menu (restaurant_id, item_name, price, image_url) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("isss", $restaurant_id, $item_name, $price, $image_url);
+$stmt = $conn->prepare("INSERT INTO menu (restaurant_id, item_name, category, price, description, image_url) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("issdss", $restaurant_id, $item_name, $category, $price, $description, $image_url);
 
 if ($stmt->execute()) {
     $menu_id = $stmt->insert_id; // Get the last inserted ID

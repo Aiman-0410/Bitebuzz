@@ -15,15 +15,19 @@ function loadMenuItems() {
         row.innerHTML = `
           <td>${item.menu_id}</td>
           <td>${item.item_name}</td>
+          <td>${item.category || ''}</td>
           <td>${item.restaurant_name}</td>
           <td>${item.price}</td>
-          <td><img src="${item.image_url}" width="60" /></td>
+          <td>${item.description || ''}</td>
+          <td><img src="/bitebuzz/${item.image_url}" width="60" /></td>
           <td>
             <button class="edit-menu-btn" 
               data-id="${item.menu_id}"
               data-name="${item.item_name}"
+              data-category="${item.category || ''}"
               data-restaurant="${item.restaurant_name}"
-              data-price="${item.price}">
+              data-price="${item.price}"
+              data-description="${item.description || ''}">
               Edit
             </button>
             <button class="delete-menu-btn" data-id="${item.menu_id}">Delete</button>
@@ -37,19 +41,37 @@ function loadMenuItems() {
     .catch(err => console.error("Menu fetch error:", err));
 }
 
+async function populateRestaurantOptions(selectedName = "") {
+  const response = await fetch('admin_get_restaurants.php');
+  const data = await response.json();
+  const select = document.getElementById('menuRestaurant');
+  select.innerHTML = '<option value="">Select Restaurant</option>';
+  if (data.success && Array.isArray(data.data)) {
+    data.data.forEach(r => {
+      const option = document.createElement('option');
+      option.value = r.name;
+      option.textContent = r.name;
+      if (r.name === selectedName) option.selected = true;
+      select.appendChild(option);
+    });
+  }
+}
+
 // Attach Edit/Delete
 function attachMenuListeners() {
   document.querySelectorAll(".edit-menu-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const id = btn.dataset.id;
-      document.getElementById("menuModalTitle").innerText = "Edit Menu Item";
-      document.getElementById("menuId").value = id;
-      document.getElementById("menuName").value = btn.dataset.name;
-      document.getElementById("menuRestaurant").value = btn.dataset.restaurant;
-      document.getElementById("menuPrice").value = btn.dataset.price;
-      document.getElementById("menuImage").value = "";
-
-      document.getElementById("menuModal").style.display = "block";
+      // Populate dropdown and then set other fields
+      populateRestaurantOptions(btn.dataset.restaurant).then(() => {
+        document.getElementById("menuModalTitle").innerText = "Edit Menu Item";
+        document.getElementById("menuId").value = btn.dataset.id;
+        document.getElementById("menuName").value = btn.dataset.name;
+        document.getElementById("menuCategory").value = btn.dataset.category || "";
+        document.getElementById("menuPrice").value = btn.dataset.price;
+        document.getElementById("menuDescription").value = btn.dataset.description || "";
+        document.getElementById("menuImage").value = "";
+        document.getElementById("menuModal").style.display = "block";
+      });
     });
   });
 
@@ -78,14 +100,17 @@ function attachMenuListeners() {
 
 // Open Add Modal
 document.getElementById("addMenuBtn")?.addEventListener("click", () => {
-  document.getElementById("menuModalTitle").innerText = "Add Menu Item";
-  document.getElementById("menuId").value = "";
-  document.getElementById("menuName").value = "";
-  document.getElementById("menuRestaurant").value = "";
-  document.getElementById("menuPrice").value = "";
-  document.getElementById("menuImage").value = "";
-
-  document.getElementById("menuModal").style.display = "block";
+  populateRestaurantOptions().then(() => {
+    document.getElementById("menuModalTitle").innerText = "Add Menu Item";
+    document.getElementById("menuId").value = "";
+    document.getElementById("menuName").value = "";
+    document.getElementById("menuCategory").value = "";
+    document.getElementById("menuRestaurant").value = "";
+    document.getElementById("menuPrice").value = "";
+    document.getElementById("menuDescription").value = "";
+    document.getElementById("menuImage").value = "";
+    document.getElementById("menuModal").style.display = "block";
+  });
 });
 
 // Handle Submit (Add or Edit)

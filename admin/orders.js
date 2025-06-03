@@ -1,3 +1,24 @@
+function getOrderStatus(orderDate, initialStatus) {
+    const now = Date.now();
+    const placedTime = new Date(orderDate).getTime();
+    const elapsed = (now - placedTime) / 1000; // seconds
+
+    if (initialStatus === "Cancelled") return "Cancelled";
+    if (initialStatus === "Delivered") return "Delivered";
+
+    if (elapsed < 60) {
+        return "Order Placed";
+    } else if (elapsed < 300) {
+        return "Preparing";
+    } else if (elapsed < 600) {
+        return "Out for Delivery";
+    } else {
+        return "Delivered";
+    }
+}
+
+
+
 function loadOrders() {
   fetch('admin_get_orders.php')
     .then(response => response.json())
@@ -28,12 +49,15 @@ function loadOrders() {
       data.data.forEach(order => {
         const createRow = (order) => {
           const row = document.createElement("tr");
+          // Compute dynamic status for display
+          const displayStatus = getOrderStatus(order.order_date, order.status);
           row.innerHTML = `
             <td>${order.order_id}</td>
             <td>${order.customer_name}</td>
             <td>${order.customer_phone}</td>
             <td>${order.payment_method}</td>
-            <td class="order-status-cell">${order.status}</td>
+            <td>${renderOrderSummary(order.order_summary)}</td> 
+            <td class="order-status-cell">${displayStatus}</td>
             <td><button class="edit-order-btn">Edit</button></td>
           `;
           return row;
@@ -62,7 +86,7 @@ function attachOrderEditListeners() {
         const select = document.createElement("select");
         select.className = "status-select";
 
-        ["Order Placed", "Preparing", "Delivered"].forEach(status => {
+        ["Order Placed", "Preparing", "Out for Delivery", "Delivered", "Cancelled"].forEach(status => {
           const option = document.createElement("option");
           option.value = status;
           option.textContent = status;

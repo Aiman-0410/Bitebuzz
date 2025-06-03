@@ -4,11 +4,13 @@ include 'db_config.php';
 
 $id = $_POST['id'] ?? '';
 $name = $_POST['name'] ?? '';
-$location = $_POST['location'] ?? '';
-$contact = $_POST['contact'] ?? '';
 $cuisine = $_POST['cuisine'] ?? '';
 $rating = $_POST['rating'] ?? '';
 $price_range = $_POST['price_range'] ?? '';
+$review_count = $_POST['review_count'] ?? 0;
+$review_1 = $_POST['review_1'] ?? '';
+$review_2 = $_POST['review_2'] ?? '';
+$review_3 = $_POST['review_3'] ?? '';
 $image_url = null;
 
 if (!$id) {
@@ -20,7 +22,7 @@ if (!$id) {
 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
     $newName = "restaurant_" . time() . ".$ext";
-    $uploadDir = "uploads/";
+    $uploadDir = dirname(__DIR__) . '/images/';
     $uploadPath = $uploadDir . $newName;
 
     // Make sure uploads directory exists
@@ -29,17 +31,17 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     }
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
-        $image_url = $uploadPath;
+        $image_url = 'images/' . $newName;
     }
 }
 
 // ✅ Build SQL dynamically
 if ($image_url) {
-    $stmt = $conn->prepare("UPDATE restaurant SET name=?, location=?, contact=?, cuisine=?, rating=?, price_range=?, image_url=? WHERE restaurant_id=?");
-    $stmt->bind_param("sssssssi", $name, $location, $contact, $cuisine, $rating, $price_range, $image_url, $id);
+    $stmt = $conn->prepare("UPDATE restaurants SET name=?, image_url=?, rating=?, cuisine=?, price_range=?, review_count=?, review_1=?, review_2=?, review_3=? WHERE id=?");
+    $stmt->bind_param("sssssisssi", $name, $image_url, $rating, $cuisine, $price_range, $review_count, $review_1, $review_2, $review_3, $id);
 } else {
-    $stmt = $conn->prepare("UPDATE restaurant SET name=?, location=?, contact=?, cuisine=?, rating=?, price_range=? WHERE restaurant_id=?");
-    $stmt->bind_param("ssssssi", $name, $location, $contact, $cuisine, $rating, $price_range, $id);
+    $stmt = $conn->prepare("UPDATE restaurants SET name=?, rating=?, cuisine=?, price_range=?, review_count=?, review_1=?, review_2=?, review_3=? WHERE id=?");
+    $stmt->bind_param("ssssisssi", $name, $rating, $cuisine, $price_range, $review_count, $review_1, $review_2, $review_3, $id);
 }
 
 if ($stmt->execute()) {

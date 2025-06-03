@@ -21,12 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     // ** Create default profile if user does not have one **
     if (!$profileData) {
-        $stmt = $conn->prepare("INSERT INTO user_profiles (username, email, phone, address, avatar) VALUES (?, '', '', '', 'images/avatar1.jpeg')");
+        $stmt = $conn->prepare("INSERT INTO user_profiles (username, email, phone, address, avatar) VALUES (?, '', '', '', 'images1/avatar1.jpeg')");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->close();
         
-        $profileData = ["username" => $username, "email" => "", "phone" => "", "address" => "", "avatar" => "images/avatar1.jpeg"];
+        $profileData = ["username" => $username, "email" => "", "phone" => "", "address" => "", "avatar" => "images1/avatar1.jpeg"];
     }
 
     echo json_encode($profileData);
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($stmt->execute()) {
         $_SESSION["user_profile"] = ["username" => $username, "email" => $email, "phone" => $phone, "address" => $address, "avatar" => $avatar];
-        echo json_encode(["message" => "Profile updated successfully"]);
+        echo json_encode(["message" => "👍 Profile updated successfully"]);
     } else {
         echo json_encode(["message" => "Update failed: " . $stmt->error]);
     }

@@ -28,8 +28,8 @@ if ($row = $result->fetch_assoc()) {
     $insert->bind_param("iss", $user_id, $email, $message);
     $insert->execute();
 
-    echo json_encode(["status" => "success", "message" => "Thank you for reaching out! We will get back to you soon."]);
+    echo json_encode(["status" => "success", "message" => "📩 Thank you for reaching out! We will get back to you soon."]);
 } else {
-    echo json_encode(["status" => "error", "message" => "Oops! Something went wrong. Please try again."]);
+    echo json_encode(["status" => "error", "message" => "❌ Oops! Something went wrong. Please try again."]);
 }
 ?>

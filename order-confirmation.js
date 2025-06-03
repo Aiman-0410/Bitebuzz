@@ -1,3 +1,11 @@
+function getCartKey() {
+  const username = localStorage.getItem('currentUser');
+  return username ? 'cart_' + username : 'cart_guest';
+}
+function getCartItems() {
+  return JSON.parse(localStorage.getItem(getCartKey()) || '[]');
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const confirmOrderBtn = document.querySelector(".confirm-btn");
 
@@ -15,21 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 customer_phone: document.getElementById("customer-phone").value.trim(),
                 payment_method: document.querySelector("input[name='payment-method']:checked")?.value
             });
-
+            
             const customerName = document.getElementById("customer-name").value.trim();
             const customerAddress = document.getElementById("customer-address").value.trim();
             const customerPhone = document.getElementById("customer-phone").value.trim();
             const paymentMethodElement = document.querySelector("input[name='payment-method']:checked");
 
             if (!customerName || !customerAddress || !customerPhone || !paymentMethodElement) {
-                alert("❌ Please fill out all fields before confirming the order.");
+                //showAlert("❌ Please fill out all fields before confirming the order.");
                 confirmOrderBtn.textContent = "Confirm Order";
                 confirmOrderBtn.disabled = false;
                 return;
             }
 
             const paymentMethod = paymentMethodElement.value;
-
+            const cartItems = getCartItems();
             const response = await fetch("order-confirmation.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -37,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     customer_name: customerName,
                     customer_address: customerAddress,
                     customer_phone: customerPhone,
+                    order_summary: cartItems, // Get cart items from localStorage
                     payment_method: paymentMethod
                 })
             });
@@ -44,12 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await response.json();
 
             if (result.status === "success") {
-                alert(`✅ Order Placed Successfully!\nOrder ID: ${result.order_id}\nPayment Method: ${paymentMethod}`);
+                showAlert(`✅ Order Placed Successfully!\nOrder ID: ${result.order_id}\nPayment Method: ${paymentMethod}`);
                 //window.location.href = "order-success.html"; // Redirect after confirmation
 
                 localStorage.setItem("latestOrderId", result.order_id); // ⭐ Store order ID for feedback
                 // Clear cart data from frontend (localStorage)
-                localStorage.removeItem("cartItems");
+                localStorage.removeItem(getCartKey());
 
                 // Update UI - Cart count to 0 and empty cart section
                 document.querySelector("#cartCount").innerText = "0";
@@ -59,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // window.location.href = "order-success.html";
             } //else {
                // console.error("Backend Error:", result.message);
-                //alert("Error placing order: " + result.message);
+                //showAlert("Error placing order: " + result.message);
             //}
         } catch (error) {
             console.error("Order Confirmation Error:", error);

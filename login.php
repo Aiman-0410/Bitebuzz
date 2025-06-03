@@ -71,10 +71,10 @@ if ($row = $result->fetch_assoc()) {
         ]);
 
     } else {
-        echo json_encode(["success" => false, "message" => "Incorrect password."]);
+        echo json_encode(["success" => false, "message" => "❌ Incorrect password."]);
     }
-} else {
-    echo json_encode(["success" => false, "message" => "User not found."]);
+} else {  
+    echo json_encode(["success" => false, "message" => "❌ User not found."]);
 }
 
 $stmt->close();

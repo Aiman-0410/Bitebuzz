@@ -47,66 +47,6 @@
     <div class="main-detail" id="choose-order-section">
       <h2 class="main-title">Choose Order</h2>
       <div class="detail-wrapper" id="menu-items">
-        <div class="detail-card">
-         <img class="detail-img" src="images/drnk-lab/coffee.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Choco Cafe Cold Coffee</h4>
-             <p class="detail-sub">Chilled coffee drink blended with chocolate, topped with whipped cream.</p>
-             <p class="price">Rs.200</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Choco Cafe Cold Coffee', 200)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-        </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/mcdonald's/iced-coffee.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Iced Coffee</h4>
-             <p class="detail-sub">A chilled coffee drink with a hint of sweetness, perfect for a quick pick-me-up.</p>
-             <p class="price">Rs.150</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Iced Coffee', 150)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/mcdonald's/ice-tea.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Lemon Ice Tea</h4>
-             <p class="detail-sub">A refreshing blend of aromatic tea infused with the crisp and tangy flavor of lemon, perfect for a rejuvenating drink.</p>
-             <p class="price">Rs.180</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Lemon Ice Tea', 180)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-          </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/puzzles/cold-coffee.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Cold Coffee</h4>
-             <p class="detail-sub">A refreshing coffee drink blended with milk and ice, topped with whipped cream.</p>
-             <p class="price">Rs.120</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Cold Coffee', 120)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
-       <div class="detail-card">
-         <img class="detail-img" src="images/puzzles/iced-lemon-tea.jpeg">
-          <div class="detail-desc">
-           <div class="detail-name">
-             <h4>Iced Lemon Tea</h4>
-             <p class="detail-sub">A chilled tea infused with lemon flavor, perfect for a refreshing break.</p>
-             <p class="price">Rs.100</p>
-             <button class="add-to-cart-btn" onclick="addToCart('Iced Lemon Tea', 100)">Add to Cart</button>
-           </div>
-           <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
-         </div>            
-       </div>
       </div>
     </div>
   </div>
@@ -115,8 +55,8 @@
     <div class="modal-content">
       <h3>Are you sure you want to logout?</h3>
       <div class="modal-actions">
-        <button id="logout-yes" class="modal-btn">Yes</button>
         <button id="logout-cancel" class="modal-btn">Cancel</button>
+        <button id="logout-yes" class="modal-btn">Logout</button>
       </div>
     </div>
   </div>
@@ -133,11 +73,53 @@
       event.preventDefault(); // Prevent default link behavior
       document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
     });
+
+    
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('get_menu.php?category=coffee')
+    .then(response => response.json())
+    .then(result => {
+      if (!result.success) return;
+      const data = result.data;
+      const container = document.getElementById('menu-items');
+      container.innerHTML = '';
+      data.forEach(item => {
+        container.innerHTML += `
+          <div class="detail-card">
+            <img class="detail-img" src="/bitebuzz/${item.image_url}" alt="${item.item_name}">
+            <div class="detail-desc">
+              <div class="detail-name">
+                <h4>${item.item_name}</h4>
+                <p class="detail-sub">${item.description || ''}</p>
+                <p class="price">Rs.${item.price}</p>
+                <button class="add-to-cart-btn" onclick="addToCart('${item.item_name.replace(/'/g,"\\'")}', ${item.price})">Add to Cart</button>
+              </div>
+              <ion-icon class="detail-favourites" name="bookmark-outline"></ion-icon>
+            </div>
+          </div>
+        `;
+      });
+    });
+});
+
+
+    // --- Alert function ---
+    function showAlert(message, type) {
+      document.querySelectorAll('.alert').forEach(el => el.remove());
+      const alertBox = document.createElement("div");
+      alertBox.classList.add("alert", type);
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+        alertBox.remove();
+      }, 3000);
+    }
   </script>
   <script src="script1.js"></script>
+  
   <script src="logout1.js"></script>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</html> 
+</html>

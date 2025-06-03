@@ -1,6 +1,40 @@
+function showAlert(message, type) {
+    document.querySelectorAll('.alert').forEach(el => el.remove());
+    const alertBox = document.createElement("div");
+    alertBox.classList.add("alert", type || "info");
+    alertBox.textContent = message;
+    document.body.appendChild(alertBox);
+    setTimeout(() => {
+        alertBox.remove();
+    }, 3000);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // Identify the current page
     const currentPage = window.location.pathname;
+
+    /*const logoutMsg = localStorage.getItem('logoutMessage');
+    if (logoutMsg) {
+      showAlert(logoutMsg, "success");
+      localStorage.removeItem('logoutMessage');
+    }*/
+
+    // --- Cart helper function ---
+    function saveCartForUser(username, cartItems) {
+        localStorage.setItem('cart_' + username, JSON.stringify(cartItems));
+    }
+
+    // (Optional) Helper to load cart for user
+    /*function loadCartForUser(username) {
+        return JSON.parse(localStorage.getItem('cart_' + username) || '[]');
+    }*/
+    function saveCart(cartItems) {
+      const username = localStorage.getItem('currentUser');
+      if (username) {
+        saveCartForUser(username, cartItems);
+      }
+    }     
+
 
     console.log("Current Page:", currentPage); // Debug: Check which page is loaded
 
@@ -41,10 +75,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 const data = await response.json();
 
                 if (data.success) {
-                    alert("Login successful! Redirecting...");
-                    window.location.href = data.redirect;
+                     const username = loginData.username; // or whatever variable holds the username
+                     localStorage.setItem('currentUser', username);
+                     localStorage.setItem('cart_' + username, JSON.stringify([])); // Clear cart for this user
+                     // Optionally, clear guest cart too:
+                     localStorage.setItem('cart_guest', JSON.stringify([]));
+                     localStorage.removeItem("shoppingCart");
+                     localStorage.removeItem("activeOrder");
+                    showAlert("✅Login successful! Redirecting...");
+                    setTimeout(function() {
+                      window.location.href = data.redirect;
+                    }, 1500);  
                 } else {
-                    alert(data.message); // Displays correct error (password/user issue)
+                    showAlert(data.message, "error"); // Displays correct error (password/user issue)
                     loginForm.reset();
                 }
             } catch (error) {
@@ -80,10 +123,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 const data = await response.json();
                 if (data.success) {
-                    alert("Signup successful! Redirecting...");
-                    window.location.href = "homepage.html";
+                    const username = userData.username; // or whatever variable holds the username
+                    localStorage.setItem('cart_' + username, JSON.stringify([]));
+                    localStorage.setItem('cart_guest', JSON.stringify([])); // optional
+                    localStorage.removeItem("shoppingCart");
+                    localStorage.removeItem("activeOrder");
+
+
+                    //localStorage.setItem('currentUser', userData.username);
+                    //saveCartForUser(userData.username, []); // Start with an empty cart for new user
+                    showAlert("🎉Signup successful! Redirecting...");
+                    setTimeout(function() {
+                      window.location.href = 'homepage.html';
+                    }, 1500);
                 } else {
-                    alert(data.message);
+                    showAlert(data.message, "error"); // Displays correct error (username/phone issue)
                 }
             } catch (error) {
                 console.error("Fetch error:", error);

@@ -2,15 +2,29 @@
 include 'db_config.php';
 header('Content-Type: application/json');
 
-$stmt = $conn->prepare("
-    SELECT m.menu_id, m.item_name, m.price, m.image_url, r.name AS restaurant_name 
-    FROM menu m 
-    JOIN restaurant r ON m.restaurant_id = r.restaurant_id
-    ORDER BY m.menu_id ASC
-");
+$menuItems = [];
+$restaurant_id = isset($_GET['restaurant_id']) ? intval($_GET['restaurant_id']) : 0;
+
+if ($restaurant_id > 0) {
+    $stmt = $conn->prepare("
+        SELECT m.menu_id, m.item_name, m.category, m.price, m.image_url, m.description, r.name AS restaurant_name 
+        FROM menu m 
+        JOIN restaurants r ON m.restaurant_id = r.id
+        WHERE m.restaurant_id = ?
+        ORDER BY m.menu_id ASC
+    ");
+    $stmt->bind_param("i", $restaurant_id);
+} else {
+    $stmt = $conn->prepare("
+        SELECT m.menu_id, m.item_name, m.category, m.price, m.image_url, m.description, r.name AS restaurant_name 
+        FROM menu m 
+        JOIN restaurants r ON m.restaurant_id = r.id
+        ORDER BY m.menu_id ASC
+    ");
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
-$menuItems = [];
 
 while ($row = $result->fetch_assoc()) {
     $menuItems[] = $row;

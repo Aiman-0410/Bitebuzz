@@ -103,7 +103,10 @@
   <script>
     document.getElementById('logout-yes').addEventListener('click', function() {
     // Redirect to the login page or perform logout action
-      window.location.href = 'login.html';
+      showAlert("👋You have been logged out successfully.", "success");
+      setTimeout( function() {
+        window.location.href = 'login.html';
+      }, 1500);
     });
     document.getElementById('logout-cancel').addEventListener('click', function() {
     // Close the modal
@@ -113,8 +116,20 @@
       event.preventDefault(); // Prevent default link behavior
       document.getElementById('logout-modal').style.display = 'flex'; // Show the modal
     });
+    // --- Alert function ---
+    function showAlert(message, type) {
+      document.querySelectorAll('.alert').forEach(el => el.remove());
+      const alertBox = document.createElement("div");
+      alertBox.classList.add("alert", type);
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+        alertBox.remove();
+      }, 3000);
+    }
 
   </script>
+  
   <script src="script1.js"></script>
   <script src="logout1.js"></script>
   <script src="feedback.js"></script>

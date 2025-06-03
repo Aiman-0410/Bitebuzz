@@ -9,7 +9,7 @@ if (!$id) {
 }
 
 // Ensure restaurant exists before deleting
-$stmt_check = $conn->prepare("SELECT restaurant_id FROM restaurant WHERE restaurant_id = ?");
+$stmt_check = $conn->prepare("SELECT id FROM restaurants WHERE id = ?");
 $stmt_check->bind_param("i", $id);
 $stmt_check->execute();
 $result = $stmt_check->get_result();
@@ -21,7 +21,7 @@ if ($result->num_rows === 0) {
 $stmt_check->close();
 
 // Delete the restaurant
-$stmt_delete = $conn->prepare("DELETE FROM restaurant WHERE restaurant_id = ?");
+$stmt_delete = $conn->prepare("DELETE FROM restaurants WHERE id = ?");
 $stmt_delete->bind_param("i", $id);
 
 if ($stmt_delete->execute()) {

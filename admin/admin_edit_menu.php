@@ -4,12 +4,14 @@ include 'db_config.php';
 
 $id = $_POST['id'] ?? '';
 $item_name = $_POST['item_name'] ?? '';
+$category = $_POST['category'] ?? '';
 $restaurant_name = $_POST['restaurant_name'] ?? '';
 $price = $_POST['price'] ?? '';
+$description = $_POST['description'] ?? '';
 $image_url = '';
 
 // ✅ Validate input
-if (!$id || !$item_name || !$restaurant_name || !$price) {
+if (!$id || !$item_name || !$restaurant_name || !$price || !$description) {
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     exit;
 }
@@ -32,7 +34,7 @@ $stmt->close();
 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
     $fileExt = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
     $imgName = uniqid("menu_") . '.' . $fileExt;
-    $targetDir = __DIR__ . '/images/';
+    $targetDir = dirname(__DIR__) . '/images/';
     $targetFile = $targetDir . $imgName;
 
     if (!is_dir($targetDir)) {
@@ -49,11 +51,11 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
 
 // ✅ Update menu item
 if ($image_url) {
-    $stmt = $conn->prepare("UPDATE menu SET restaurant_id = ?, item_name = ?, price = ?, image_url = ? WHERE menu_id = ?");
-    $stmt->bind_param("isssi", $restaurant_id, $item_name, $price, $image_url, $id);
+    $stmt = $conn->prepare("UPDATE menu SET restaurant_id = ?, item_name = ?, category = ?, price = ?, description=?, image_url = ? WHERE menu_id = ?");
+    $stmt->bind_param("issdssi", $restaurant_id, $item_name, $category, $price, $description, $image_url, $id);
 } else {
-    $stmt = $conn->prepare("UPDATE menu SET restaurant_id = ?, item_name = ?, price = ? WHERE menu_id = ?");
-    $stmt->bind_param("issi", $restaurant_id, $item_name, $price, $id);
+    $stmt = $conn->prepare("UPDATE menu SET restaurant_id = ?, item_name = ?, category = ?, price = ?, description=? WHERE menu_id = ?");
+    $stmt->bind_param("issdsi", $restaurant_id, $item_name, $category, $price, $description, $id);
 }
 
 if ($stmt->execute()) {
